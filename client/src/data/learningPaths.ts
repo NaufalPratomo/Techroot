@@ -66,15 +66,12 @@ export const learningPaths: LearningPath[] = [
                 isFree: true,
                 xpReward: 10,
                 content: `# Pengenalan Variables
-
 Variables adalah wadah untuk menyimpan data. Dalam JavaScript, kita menggunakan \`let\`, \`const\`, dan \`var\` untuk mendeklarasikan variabel.
 
 ## Mengapa Variabel Penting?
-
 Bayangkan Anda sedang memasak. Anda membutuhkan wadah untuk menyimpan bahan-bahan yang berbeda - garam di satu wadah, gula di wadah lain. Variabel bekerja dengan cara yang sama dalam pemrograman!
 
 ## Tipe-tipe Deklarasi
-
 - **let**: Block-scoped, bisa di-reassign
 - **const**: Block-scoped, tidak bisa di-reassign
 - **var**: Function-scoped (gaya lama)
@@ -107,11 +104,9 @@ Dalam praktik modern, gunakan \`const\` sebagai default, dan \`let\` hanya jika 
                 isFree: true,
                 xpReward: 10,
                 content: `# Tipe Data dalam JavaScript
-
 JavaScript memiliki beberapa tipe data dasar yang perlu Anda ketahui:
 
 ## Tipe Data Primitif
-
 ### 1. String
 Teks yang diapit oleh tanda kutip.
 \`\`\`javascript
@@ -138,7 +133,6 @@ const isLoggedIn = false;
 - null: nilai kosong yang disengaja
 
 ## Tipe Data Kompleks
-
 ### Array
 Kumpulan data dalam urutan tertentu.
 \`\`\`javascript
@@ -157,23 +151,20 @@ const person = { name: "Bob", age: 30 };
                 type: 'material',
                 xpReward: 10,
                 content: `# Konvensi Penamaan Variabel
-
 Penamaan yang baik membuat kode lebih mudah dibaca dan dipahami.
 
 ## Aturan Dasar
-
 1. **Huruf, angka, underscore, dan dollar**
-   - Boleh: \`name\`, \`age2\`, \`_private\`, \`$element\`
-   - Tidak boleh: \`2fast\`, \`my-var\`
+- Boleh: \`name\`, \`age2\`, \`_private\`, \`$element\`
+- Tidak boleh: \`2fast\`, \`my-var\`
 
 2. **Case Sensitive**
-   - \`name\` dan \`Name\` adalah variabel berbeda
+- \`name\` dan \`Name\` adalah variabel berbeda
 
 3. **Tidak boleh kata kunci**
-   - Tidak boleh: \`let\`, \`const\`, \`function\`, dll.
+- Tidak boleh: \`let\`, \`const\`, \`function\`, dll.
 
 ## Konvensi Populer
-
 ### camelCase (Disarankan untuk JavaScript)
 \`\`\`javascript
 const firstName = "John";

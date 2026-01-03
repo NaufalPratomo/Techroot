@@ -18,7 +18,7 @@ import { ModuleSidebar } from '@/components/ModuleSidebar';
 import { LessonContent } from '@/components/LessonContent';
 import { LessonNavigation } from '@/components/LessonNavigation';
 import { LearningSidebar } from '@/components/LearningSidebar';
-import { ArrowLeft, Search, Menu, X } from 'lucide-react';
+import { ArrowLeft, Search, Menu, X, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function ModuleDetail({
@@ -64,13 +64,16 @@ export default function ModuleDetail({
 
     if (!path || !module) {
         return (
-            <div className="min-h-screen bg-background flex items-center justify-center">
+            <div className="min-h-screen bg-white flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold mb-4">Module Tidak Ditemukan</h1>
-                    <p className="text-muted-foreground mb-6">
+                    <div className="h-20 w-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-6">
+                        <Sparkles className="h-10 w-10 text-slate-400" />
+                    </div>
+                    <h1 className="text-2xl font-bold mb-4 text-slate-900">Module Tidak Ditemukan</h1>
+                    <p className="text-slate-500 mb-6">
                         Module yang Anda cari tidak ada.
                     </p>
-                    <Button asChild>
+                    <Button asChild className="bg-[#2443B0] hover:bg-[#1e3895] text-white rounded-full px-6">
                         <Link href="/paths">Lihat Semua Paths</Link>
                     </Button>
                 </div>
@@ -80,10 +83,13 @@ export default function ModuleDetail({
 
     if (!lesson) {
         return (
-            <div className="min-h-screen bg-background flex items-center justify-center">
+            <div className="min-h-screen bg-white flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold mb-4">Lesson Tidak Ditemukan</h1>
-                    <Button asChild>
+                    <div className="h-20 w-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-6">
+                        <Sparkles className="h-10 w-10 text-slate-400" />
+                    </div>
+                    <h1 className="text-2xl font-bold mb-4 text-slate-900">Lesson Tidak Ditemukan</h1>
+                    <Button asChild className="bg-[#2443B0] hover:bg-[#1e3895] text-white rounded-full px-6">
                         <Link href={`/paths/${pathId}`}>Kembali ke Path</Link>
                     </Button>
                 </div>
@@ -129,28 +135,28 @@ export default function ModuleDetail({
     };
 
     return (
-        <div className="min-h-screen bg-background flex">
+        <div className="min-h-screen bg-white flex">
             {/* Left Sidebar - Icons */}
             <LearningSidebar pathTitle={path.title} pathId={pathId!} />
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col min-w-0">
                 {/* Header */}
-                <header className="h-14 border-b border-border flex items-center justify-between px-4 bg-card">
+                <header className="h-14 border-b border-slate-100 flex items-center justify-between px-4 bg-white shadow-sm">
                     <Link
                         href={`/paths/${pathId}`}
-                        className="flex items-center gap-2 text-sm hover:text-foreground transition-colors text-muted-foreground"
+                        className="flex items-center gap-2 text-sm hover:text-[#2443B0] transition-colors text-slate-500"
                     >
                         <ArrowLeft className="h-4 w-4" />
-                        <span className="hidden sm:inline">{path.title}</span>
+                        <span className="hidden sm:inline font-medium">{path.title}</span>
                     </Link>
 
                     <div className="flex items-center gap-3">
                         {/* Search */}
-                        <button className="flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-muted rounded-lg hover:bg-muted/80 transition-colors">
+                        <button className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-500 bg-slate-50 rounded-full hover:bg-slate-100 transition-colors border border-slate-100">
                             <Search className="h-4 w-4" />
                             <span className="hidden md:inline">Cari modul/konten</span>
-                            <kbd className="hidden lg:inline ml-2 px-1.5 py-0.5 text-xs bg-background rounded border border-border">
+                            <kbd className="hidden lg:inline ml-2 px-1.5 py-0.5 text-xs bg-white rounded border border-slate-200 text-slate-400">
                                 CTRL /
                             </kbd>
                         </button>
@@ -158,9 +164,9 @@ export default function ModuleDetail({
                         {/* Toggle Sidebar */}
                         <button
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-muted transition-colors lg:hidden"
+                            className="h-9 w-9 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors lg:hidden border border-slate-100"
                         >
-                            {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                            {sidebarOpen ? <X className="h-5 w-5 text-slate-600" /> : <Menu className="h-5 w-5 text-slate-600" />}
                         </button>
                     </div>
                 </header>
@@ -168,7 +174,7 @@ export default function ModuleDetail({
                 {/* Content Area */}
                 <div className="flex-1 flex overflow-hidden">
                     {/* Main Lesson Content */}
-                    <main className="flex-1 overflow-y-auto pb-20">
+                    <main className="flex-1 overflow-y-auto pb-20 bg-slate-50/30">
                         <div className="max-w-4xl mx-auto px-6 py-8">
                             <LessonContent
                                 lesson={lesson}
@@ -180,7 +186,7 @@ export default function ModuleDetail({
 
                     {/* Right Sidebar - Module Navigation */}
                     <aside className={cn(
-                        "transition-all duration-300",
+                        "transition-all duration-300 border-l border-slate-100 bg-white",
                         sidebarOpen ? "w-80" : "w-0 overflow-hidden",
                         "hidden lg:block"
                     )}>
@@ -197,14 +203,14 @@ export default function ModuleDetail({
 
             {/* Mobile Sidebar Overlay */}
             {sidebarOpen && (
-                <div className="lg:hidden fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
-                    <div className="absolute right-0 top-0 h-full">
-                        <div className="flex items-center justify-end p-4">
+                <div className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm">
+                    <div className="absolute right-0 top-0 h-full bg-white shadow-2xl">
+                        <div className="flex items-center justify-end p-4 border-b border-slate-100">
                             <button
                                 onClick={() => setSidebarOpen(false)}
-                                className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-muted transition-colors"
+                                className="h-9 w-9 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors"
                             >
-                                <X className="h-5 w-5" />
+                                <X className="h-5 w-5 text-slate-600" />
                             </button>
                         </div>
                         <ModuleSidebar

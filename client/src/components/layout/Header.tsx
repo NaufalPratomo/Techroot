@@ -194,7 +194,7 @@ export function Header() {
                                 <Link href="/register">Daftar</Link>
                             </Button>
                             <Button size="sm" asChild>
-                                <Link href="/masuk">Mulai</Link>
+                                <Link href="/login">Mulai</Link>
                             </Button>
                         </>
                     )}
