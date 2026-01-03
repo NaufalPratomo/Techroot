@@ -6,6 +6,7 @@ import 'dotenv/config';
 import healthRoute from '../src/routes/health.route';
 import authRoute from '../src/routes/auth.route';
 import progressRoute from '../src/routes/progress.route';
+import aiRoute from '../src/routes/ai.route';
 
 const app: Application = express();
 
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use('/health', healthRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/progress', progressRoute);
+app.use('/api/ai', aiRoute);
 
 // Root endpoint
 app.get('/', (req: Request, res: Response) => {

@@ -16,4 +16,5 @@ export const env = {
     port: Number(process.env.PORT) || 5000,
     supabaseUrl: supabaseUrl || '',
     supabaseServiceKey: supabaseServiceKey || '',
+    openRouterApiKey: process.env.OPENROUTER_API_KEY || '',
 };
