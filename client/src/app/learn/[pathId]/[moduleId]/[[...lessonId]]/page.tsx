@@ -179,7 +179,10 @@ export default function ModuleDetail({
                 {/* Content Area */}
                 <div className="flex-1 flex overflow-hidden">
                     {/* Main Lesson Content or Tanya Root */}
-                    <main className="flex-1 overflow-y-auto pb-10 bg-slate-50/30">
+                    <main className={cn(
+                        "flex-1 flex flex-col min-w-0 bg-slate-50/30",
+                        activeTab === 'materi' ? "overflow-y-auto pb-10" : "overflow-hidden"
+                    )}>
                         {activeTab === 'materi' ? (
                             <div className="max-w-4xl mx-auto px-6 py-8">
                                 <LessonContent
