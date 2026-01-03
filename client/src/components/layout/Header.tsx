@@ -15,7 +15,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 
 import {
     Code2,
@@ -52,7 +52,7 @@ export function Header() {
     };
 
     return (
-        <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-7xl border border-border/40 bg-background/70 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
+        <header className="fixed left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-7xl border-2 border-border bg-white backdrop-blur-xl rounded-b-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
             <div className="mx-auto flex h-16 items-center justify-between px-6">
                 <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
                     <Code2 className="h-6 w-6" />
@@ -190,11 +190,11 @@ export function Header() {
                         </>
                     ) : (
                         <>
-                            <Button variant="ghost" size="sm" asChild>
-                                <Link href="/login">Masuk</Link>
+                            <Button variant="ghost" className="hover:bg-gray-100" size="sm" asChild>
+                                <Link href="/register">Daftar</Link>
                             </Button>
                             <Button size="sm" asChild>
-                                <Link href="/register">Mulai</Link>
+                                <Link href="/masuk">Mulai</Link>
                             </Button>
                         </>
                     )}
