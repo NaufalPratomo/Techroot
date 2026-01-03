@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Confetti from 'react-confetti';
 import { Button } from '@/components/ui/button';
@@ -16,7 +16,8 @@ import {
     ArrowRight,
     Sparkles,
     BookOpen,
-    CheckCircle2
+    CheckCircle2,
+    Loader2
 } from 'lucide-react';
 
 // Badge data
@@ -28,8 +29,20 @@ const availableBadges = [
     { id: 'xp-hunter', name: 'Pemburu XP', icon: Trophy, color: 'text-emerald-500', bg: 'bg-emerald-100', description: 'Mengumpulkan 100 XP' },
 ];
 
-export default function ResultPage() {
-    const router = useRouter();
+// Loading fallback component
+function ResultLoading() {
+    return (
+        <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 flex items-center justify-center">
+            <div className="text-center">
+                <Loader2 className="h-12 w-12 animate-spin text-[#2443B0] mx-auto mb-4" />
+                <p className="text-slate-500">Memuat hasil...</p>
+            </div>
+        </div>
+    );
+}
+
+// Main result content component
+function ResultContent() {
     const searchParams = useSearchParams();
     const { xp, level, streak, progress } = useUser();
 
@@ -66,7 +79,7 @@ export default function ResultPage() {
 
         window.addEventListener('resize', handleResize);
 
-        // Stop confetti after 5 seconds
+        // Stop confetti after 80 seconds
         const timer = setTimeout(() => setShowConfetti(false), 80000);
 
         return () => {
@@ -92,7 +105,7 @@ export default function ResultPage() {
             <div className="max-w-2xl w-full">
                 {/* Success Icon */}
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center h-24 w-24 rounded-full bg-[#D7FE44] shadow-lg shadow-[#D7FE44]/30 mb-6">
+                    <div className="inline-flex items-center justify-center h-24 w-24 rounded-full bg-[#D7FE44] shadow-lg shadow-[#D7FE44]/30 mb-6 animate-bounce">
                         <CheckCircle2 className="h-12 w-12 text-slate-900" />
                     </div>
                     <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
@@ -212,5 +225,14 @@ export default function ResultPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+// Export default page with Suspense wrapper
+export default function ResultPage() {
+    return (
+        <Suspense fallback={<ResultLoading />}>
+            <ResultContent />
+        </Suspense>
     );
 }
