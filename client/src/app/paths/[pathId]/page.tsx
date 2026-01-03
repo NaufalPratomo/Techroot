@@ -25,7 +25,7 @@ export default function PathDetail({ params }: { params: Promise<{ pathId: strin
         return (
             <div className="min-h-screen bg-background">
                 <Header />
-                <div className="container max-w-7xl mx-auto px-4 py-20 text-center">
+                <div className="container max-w-7xl mx-auto px-4 py-20 text-center mt-20">
                     <h1 className="text-2xl font-bold mb-4">Path Not Found</h1>
                     <p className="text-muted-foreground mb-6">
                         The learning path you're looking for doesn't exist.
@@ -68,18 +68,9 @@ export default function PathDetail({ params }: { params: Promise<{ pathId: strin
             <Header />
 
             <div className="container max-w-7xl mx-auto px-4 py-8">
-                <div className="max-w-3xl mx-auto">
-                    {/* Back Link */}
-                    <Link
-                        href="/paths"
-                        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
-                    >
-                        <ArrowLeft className="h-4 w-4" />
-                        All Paths
-                    </Link>
-
+                <div className="max-w-7xl mx-auto">
                     {/* Path Header */}
-                    <div className="mb-8">
+                    <div className="mb-8 mt-20">
                         <div className="flex items-start gap-4 mb-4">
                             <div className="h-14 w-14 rounded-lg bg-secondary flex items-center justify-center">
                                 {iconMap[path.icon] || <Code2 className="h-8 w-8" />}
@@ -108,9 +99,9 @@ export default function PathDetail({ params }: { params: Promise<{ pathId: strin
                     </div>
 
                     {/* Modules List */}
-                    <div className="space-y-4">
+                    <div className="space-y-7">
                         <h2 className="font-semibold">Modules</h2>
-                        <div className="space-y-4">
+                        <div className="grid grid-cols-1 gap-7">
                             {path.modules.map((module, index) => (
                                 <ModuleCard
                                     key={module.id}

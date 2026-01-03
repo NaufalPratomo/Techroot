@@ -50,7 +50,7 @@ export default function Dashboard() {
             <Header />
 
             <div className="container max-w-7xl mx-auto px-4 py-8">
-                <div className="space-y-8">
+                <div className="space-y-8 mt-20">
                     {/* Welcome Section */}
                     <div>
                         <h1 className="text-3xl font-bold mb-2">Welcome back, {user?.name}!</h1>

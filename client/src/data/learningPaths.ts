@@ -813,17 +813,17 @@ export const getLessonById = (pathId: string, moduleId: string, lessonId: string
 };
 
 export const getModuleProgress = (
-  moduleId: string, 
+  moduleId: string,
   completedLessons: string[]
 ): { completed: number; total: number; percentage: number } => {
   const path = learningPaths.find(p => p.modules.some(m => m.id === moduleId));
   const module = path?.modules.find(m => m.id === moduleId);
-  
+
   if (!module) return { completed: 0, total: 0, percentage: 0 };
-  
+
   let total = 0;
   let completed = 0;
-  
+
   for (const section of module.sections) {
     for (const lesson of section.lessons) {
       total++;
@@ -832,7 +832,7 @@ export const getModuleProgress = (
       }
     }
   }
-  
+
   return {
     completed,
     total,
@@ -849,7 +849,7 @@ export const getNextLesson = (
   if (!module) return null;
 
   let foundCurrent = false;
-  
+
   for (const section of module.sections) {
     for (const lesson of section.lessons) {
       if (foundCurrent) {
@@ -860,7 +860,7 @@ export const getNextLesson = (
       }
     }
   }
-  
+
   return null;
 };
 
@@ -873,7 +873,7 @@ export const getPrevLesson = (
   if (!module) return null;
 
   let prevLesson: { lesson: Lesson; sectionId: string } | null = null;
-  
+
   for (const section of module.sections) {
     for (const lesson of section.lessons) {
       if (lesson.id === currentLessonId) {
@@ -882,6 +882,6 @@ export const getPrevLesson = (
       prevLesson = { lesson, sectionId: section.id };
     }
   }
-  
+
   return null;
 };
