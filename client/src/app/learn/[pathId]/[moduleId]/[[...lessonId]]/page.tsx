@@ -20,6 +20,7 @@ import { LessonNavigation } from '@/components/LessonNavigation';
 import { LearningSidebar } from '@/components/LearningSidebar';
 import { ArrowLeft, Search, Menu, X, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { AIStarterPage } from '@/components/AIStarterPage';
 
 export default function ModuleDetail({
     params
@@ -36,6 +37,7 @@ export default function ModuleDetail({
     const { toast } = useToast();
     const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [activeTab, setActiveTab] = useState<'materi' | 'tanya-root'>('materi');
 
     const path = pathId ? getPathById(pathId) : undefined;
     const module = pathId && moduleId ? getModuleById(pathId, moduleId) : undefined;
@@ -135,7 +137,12 @@ export default function ModuleDetail({
     return (
         <div className="min-h-screen bg-white flex">
             {/* Left Sidebar - Icons */}
-            <LearningSidebar pathTitle={path.title} pathId={pathId!} />
+            <LearningSidebar
+                pathTitle={path.title}
+                pathId={pathId!}
+                activeTab={activeTab}
+                onTabChange={setActiveTab}
+            />
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col min-w-0">
@@ -171,15 +178,19 @@ export default function ModuleDetail({
 
                 {/* Content Area */}
                 <div className="flex-1 flex overflow-hidden">
-                    {/* Main Lesson Content */}
-                    <main className="flex-1 overflow-y-auto pb-20 bg-slate-50/30">
-                        <div className="max-w-4xl mx-auto px-6 py-8">
-                            <LessonContent
-                                lesson={lesson}
-                                isCompleted={isLessonCompleted}
-                                onComplete={handleLessonComplete}
-                            />
-                        </div>
+                    {/* Main Lesson Content or Tanya Root */}
+                    <main className="flex-1 overflow-y-auto pb-10 bg-slate-50/30">
+                        {activeTab === 'materi' ? (
+                            <div className="max-w-4xl mx-auto px-6 py-8">
+                                <LessonContent
+                                    lesson={lesson}
+                                    isCompleted={isLessonCompleted}
+                                    onComplete={handleLessonComplete}
+                                />
+                            </div>
+                        ) : (
+                            <AIStarterPage />
+                        )}
                     </main>
 
                     {/* Right Sidebar - Module Navigation */}
