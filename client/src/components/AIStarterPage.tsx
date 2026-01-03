@@ -10,6 +10,7 @@ import {
     ChevronDown,
     X,
     FileText,
+    User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -113,13 +114,14 @@ export const AIStarterPage = () => {
     };
 
     return (
-        <div className="relative flex flex-col h-full w-full bg-white overflow-hidden">
+        <div className="relative flex flex-col h-screen w-full bg-white overflow-hidden">
             {/* Background design */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div
                     className="absolute bottom-0 left-0 right-0 h-[60%]"
                     style={{
-                        background: 'linear-gradient(to top, rgba(36, 67, 176, 0.08) 0%, rgba(59, 130, 246, 0.05) 30%, transparent 100%)'
+                        background:
+                            "linear-gradient(to top, rgba(36, 67, 176, 0.08) 0%, rgba(59, 130, 246, 0.05) 30%, transparent 100%)",
                     }}
                 />
                 <div className="absolute bottom-[-10%] left-[10%] w-[500px] h-[400px] bg-blue-300/20 rounded-full blur-[120px]" />
@@ -127,10 +129,9 @@ export const AIStarterPage = () => {
             </div>
 
             {/* Main Layout Container */}
-            <div className="relative z-10 flex flex-col h-full w-full overflow-hidden">
-
+            <div className="bottom-0 left-0 right-0 fixed z-10 flex flex-col h-full w-full overflow-hidden">
                 {/* 1. SCROLLABLE CHAT AREA */}
-                <div className="flex-1 w-full overflow-y-auto scrollbar-hide">
+                <div className="flex-1 w-full pb-16 overflow-y-auto scrollbar-hide">
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col">
                         {messages.length === 0 ? (
                             /* Hero Section */
@@ -146,33 +147,38 @@ export const AIStarterPage = () => {
                             </div>
                         ) : (
                             /* Message List */
-                            <div className="py-12 space-y-8">
+                            <div className="py-28 space-y-8">
                                 {messages.map((msg, i) => (
                                     <div
                                         key={i}
                                         className={cn(
-                                            "flex w-full animate-in fade-in slide-in-from-bottom-2 duration-500",
-                                            msg.role === "user" ? "justify-end" : "justify-start"
+                                            "flex w-full animate-in fade-in slide-in-from-bottom-2 duration-500 gap-3",
+                                            msg.role === "user" ? "flex-row-reverse" : "flex-row"
                                         )}
                                     >
                                         <div
                                             className={cn(
-                                                "max-w-[85%] rounded-[24px] p-5 shadow-sm transition-all hover:shadow-md",
+                                                "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-md border animate-in zoom-in-50 duration-500",
+                                                msg.role === "user"
+                                                    ? "bg-white border-blue-100 text-blue-600"
+                                                    : "bg-blue-600 border-blue-400 text-white"
+                                            )}
+                                        >
+                                            {msg.role === "user" ? (
+                                                <User className="h-5 w-5" />
+                                            ) : (
+                                                <Bot className="h-5 w-5" />
+                                            )}
+                                        </div>
+
+                                        <div
+                                            className={cn(
+                                                "max-w-[80%] rounded-[24px] p-5 shadow-sm transition-all hover:shadow-md",
                                                 msg.role === "user"
                                                     ? "bg-[#2443B0] text-white rounded-tr-none"
                                                     : "bg-white border border-slate-100 text-slate-800 rounded-tl-none"
                                             )}
                                         >
-                                            {msg.role === "assistant" && (
-                                                <div className="flex items-center gap-2 mb-3 text-[#2443B0]">
-                                                    <div className="p-1 rounded-lg bg-blue-50">
-                                                        <Bot className="h-4 w-4" />
-                                                    </div>
-                                                    <span className="text-xs font-bold uppercase tracking-widest px-1">
-                                                        Root AI
-                                                    </span>
-                                                </div>
-                                            )}
                                             <div className="text-sm md:text-base whitespace-pre-wrap leading-relaxed opacity-95">
                                                 {msg.content}
                                             </div>
@@ -181,18 +187,20 @@ export const AIStarterPage = () => {
                                 ))}
 
                                 {isLoading && (
-                                    <div className="flex justify-start animate-in fade-in duration-300">
-                                        <div className="bg-white border border-slate-100 rounded-[24px] p-5 rounded-tl-none shadow-sm flex flex-col gap-3">
-                                            <div className="flex items-center gap-2 text-[#2443B0]">
-                                                <Bot className="h-4 w-4 animate-bounce" />
-                                                <span className="text-xs font-bold uppercase tracking-widest px-1">
-                                                    Root sedang berpikir...
+                                    <div className="flex w-full animate-in fade-in duration-300 gap-3">
+                                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-lg border border-blue-400 animate-pulse">
+                                            <Bot className="h-5 w-5 text-white animate-spin-slow" />
+                                        </div>
+                                        <div className="bg-white border border-slate-100 rounded-[24px] p-5 rounded-tl-none shadow-sm flex flex-col gap-3 min-w-[200px]">
+                                            <div className="flex items-center gap-2">
+                                                <div className="h-2 w-2 bg-blue-600 rounded-full animate-bounce" />
+                                                <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">
+                                                    Root sedang merespon
                                                 </span>
                                             </div>
-                                            <div className="flex gap-1.5 px-2">
-                                                <div className="w-1.5 h-1.5 bg-blue-300 rounded-full animate-pulse delay-75" />
-                                                <div className="w-1.5 h-1.5 bg-blue-300 rounded-full animate-pulse delay-150" />
-                                                <div className="w-1.5 h-1.5 bg-blue-300 rounded-full animate-pulse delay-300" />
+                                            <div className="space-y-2">
+                                                <div className="h-2 bg-slate-100 rounded-full w-full animate-pulse" />
+                                                <div className="h-2 bg-slate-100 rounded-full w-3/4 animate-pulse delay-75" />
                                             </div>
                                         </div>
                                     </div>
@@ -208,14 +216,15 @@ export const AIStarterPage = () => {
                 {/* 2. BOTTOM INPUT AREA - Fixed on top of scroll container */}
                 <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
                     {/* Glassmorphic Blur Effect for the bottom area */}
-                    <div className="absolute inset-x-0 bottom-0 h-100 bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
+                    <div
+                        className="absolute inset-x-0 bottom-0 h-100 bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
                         style={{
-                            WebkitMaskImage: 'linear-gradient(to top, black 60%, transparent 100%)',
-                            maskImage: 'linear-gradient(to top, black 60%, transparent 100%)'
+                            WebkitMaskImage: "linear-gradient(to top, black 60%, transparent 100%)",
+                            maskImage: "linear-gradient(to top, black 60%, transparent 100%)",
                         }}
                     />
 
-                    <div className="pb-14 pt-2 pointer-events-auto">
+                    <div className="pb-16 pointer-events-auto">
                         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                             <form onSubmit={handleSubmit} className="w-full">
                                 <div className="bg-white rounded-[24px] shadow-2xl border border-slate-200 p-3 md:p-4 transition-all focus-within:ring-4 focus-within:ring-blue-500/5 group">
@@ -307,12 +316,21 @@ export const AIStarterPage = () => {
                                             <div className="relative">
                                                 <button
                                                     type="button"
-                                                    onClick={() => setShowModelDropdown(!showModelDropdown)}
+                                                    onClick={() =>
+                                                        setShowModelDropdown(!showModelDropdown)
+                                                    }
                                                     className="h-10 px-4 rounded-xl border border-slate-100 flex items-center gap-2 text-slate-600 hover:bg-slate-50 hover:border-slate-200 transition-all text-sm font-medium"
                                                 >
                                                     <Bot className="h-4 w-4 text-[#2443B0]" />
-                                                    <span className="hidden sm:inline lowercase">{selectedModel.name}</span>
-                                                    <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", showModelDropdown && "rotate-180")} />
+                                                    <span className="hidden sm:inline lowercase">
+                                                        {selectedModel.name}
+                                                    </span>
+                                                    <ChevronDown
+                                                        className={cn(
+                                                            "h-3.5 w-3.5 transition-transform duration-200",
+                                                            showModelDropdown && "rotate-180"
+                                                        )}
+                                                    />
                                                 </button>
 
                                                 {showModelDropdown && (
@@ -337,10 +355,14 @@ export const AIStarterPage = () => {
                                                                                 : "hover:bg-slate-50 text-slate-600"
                                                                         )}
                                                                     >
-                                                                        <div className={cn(
-                                                                            "p-2 rounded-lg",
-                                                                            selectedModel.id === model.id ? "bg-white shadow-sm" : "bg-slate-100"
-                                                                        )}>
+                                                                        <div
+                                                                            className={cn(
+                                                                                "p-2 rounded-lg",
+                                                                                selectedModel.id === model.id
+                                                                                    ? "bg-white shadow-sm"
+                                                                                    : "bg-slate-100"
+                                                                            )}
+                                                                        >
                                                                             <Bot className="h-4 w-4" />
                                                                         </div>
                                                                         <div>
@@ -362,7 +384,8 @@ export const AIStarterPage = () => {
                                             <button
                                                 type="submit"
                                                 disabled={
-                                                    isLoading || (!inputValue.trim() && uploadedFiles.length === 0)
+                                                    isLoading ||
+                                                    (!inputValue.trim() && uploadedFiles.length === 0)
                                                 }
                                                 className="h-10 w-10 rounded-xl bg-[#2443B0] flex items-center justify-center text-white hover:bg-[#1e3895] transition-all disabled:opacity-30 disabled:grayscale shadow-lg shadow-blue-500/20 active:scale-95"
                                             >
@@ -372,13 +395,6 @@ export const AIStarterPage = () => {
                                     </div>
                                 </div>
                             </form>
-
-                            <div className="mt-4 flex items-center justify-center gap-2">
-                                <p className="text-[11px] text-slate-400 font-medium flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50/50">
-                                    <Sparkles className="h-3 w-3 text-blue-400" />
-                                    Didukung oleh {selectedModel.name} melalui OpenRouter
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>
