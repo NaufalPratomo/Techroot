@@ -50,8 +50,8 @@ const calculateLevel = (xp: number): number => {
   return Math.floor(xp / XP_PER_LEVEL) + 1;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-console.log('API_URL:', API_URL);
+// Remove trailing slash from API_URL to prevent double slashes
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/+$/, '');
 
 // Helper to get auth headers
 const getAuthHeaders = () => {
