@@ -58,7 +58,10 @@ export const AIStarterPage = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/ai/chat`, {
+            const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+            const endpoint = `${apiUrl}/api/ai/chat`;
+
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,6 +86,7 @@ export const AIStarterPage = () => {
             setIsLoading(false);
             if (textareaRef.current) textareaRef.current.style.height = 'auto';
         }
+
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {

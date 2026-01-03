@@ -1,17 +1,29 @@
-import express from 'express';
+import express, { Application } from 'express';
 import cors from 'cors';
 import healthRoute from './routes/health.route';
 import authRoute from './routes/auth.route';
 import progressRoute from './routes/progress.route';
+import aiRoute from './routes/ai.route';
 
-export const app = express();
+export const app: Application = express();
 
-app.use(cors());
+// CORS Configuration
+const corsOptions = {
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
+
 
 app.use('/health', healthRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/progress', progressRoute);
+app.use('/api/ai', aiRoute);
+
 
 app.get('/', (req, res) => {
     res.json({
