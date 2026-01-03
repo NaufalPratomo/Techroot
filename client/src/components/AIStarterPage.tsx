@@ -81,7 +81,6 @@ export const AIStarterPage = () => {
     const imageInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    // auto scroll to bottom
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -181,7 +180,6 @@ export const AIStarterPage = () => {
                 <div className="flex-1 w-full pb-16 overflow-y-auto scrollbar-hide">
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col">
                         {messages.length === 0 ? (
-                            /* Hero Section */
                             <div className="flex-1 flex flex-col items-center justify-center py-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
                                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-slate-900 text-center leading-tight mb-6">
                                     <span className="block italic opacity-40 mb-2">Tanya Root.</span>
@@ -193,7 +191,6 @@ export const AIStarterPage = () => {
                                 </p>
                             </div>
                         ) : (
-                            /* Message List */
                             <div className="py-28 space-y-8">
                                 {messages.map((msg, i) => (
                                     <div
@@ -254,15 +251,13 @@ export const AIStarterPage = () => {
                                 )}
                             </div>
                         )}
-                        {/* Buffer to prevent last message from being hidden by input bar */}
                         <div className="h-[200px] shrink-0" />
                         <div ref={messagesEndRef} />
                     </div>
                 </div>
 
-                {/* 2. BOTTOM INPUT AREA - Fixed on top of scroll container */}
-                <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
-                    {/* Glassmorphic Blur Effect for the bottom area */}
+                {/* 2. BOTTOM INPUT AREA */}
+                <div className="fixed bottom-0 left-0 right-0 z-50">
                     <div
                         className="absolute inset-x-0 bottom-0 h-100 bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
                         style={{
@@ -271,39 +266,56 @@ export const AIStarterPage = () => {
                         }}
                     />
 
-                    <div className="pb-16 pointer-events-auto">
+                    <div className="pb-16">
                         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                             <form onSubmit={handleSubmit} className="w-full">
                                 <div className="bg-white rounded-[24px] shadow-2xl border border-slate-200 p-3 md:p-4 transition-all focus-within:ring-4 focus-within:ring-blue-500/5 group">
-                                    {/* File Previews */}
                                     {uploadedFiles.length > 0 && (
-                                        <div className="flex flex-wrap gap-2 mb-3 px-1">
-                                            {uploadedFiles.map((file, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-xl px-3 py-2 text-sm"
-                                                >
-                                                    {file.type.startsWith("image/") ? (
-                                                        <ImageIcon className="h-4 w-4 text-blue-500" />
-                                                    ) : (
-                                                        <FileText className="h-4 w-4 text-slate-500" />
-                                                    )}
-                                                    <span className="text-slate-700 max-w-[150px] truncate font-medium">
-                                                        {file.name}
-                                                    </span>
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => removeFile(index)}
-                                                        className="text-slate-400 hover:text-red-500 transition-colors"
+                                        <div className="flex flex-wrap gap-3 mb-4 px-1">
+                                            {uploadedFiles.map((file, index) => {
+                                                const isImage = file.type.startsWith("image/");
+                                                const previewUrl = isImage ? URL.createObjectURL(file) : null;
+
+                                                return (
+                                                    <div
+                                                        key={index}
+                                                        className="group relative flex flex-col items-center gap-2 bg-slate-50 border border-slate-100 rounded-2xl p-2 transition-all hover:shadow-md animate-in zoom-in-95 duration-200"
                                                     >
-                                                        <X className="h-3.5 w-3.5" />
-                                                    </button>
-                                                </div>
-                                            ))}
+                                                        {isImage ? (
+                                                            <div className="relative h-24 w-24 overflow-hidden rounded-xl bg-slate-100">
+                                                                <img
+                                                                    src={previewUrl!}
+                                                                    alt={file.name}
+                                                                    className="h-full w-full object-cover"
+                                                                    onLoad={() => {
+                                                                        // Optional: Revoke URL after load if not needed for long, 
+                                                                        // but here it's fine as we might need it for re-renders
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-blue-50/50">
+                                                                <FileText className="h-10 w-10 text-blue-500" />
+                                                            </div>
+                                                        )}
+
+                                                        <span className="text-[10px] text-slate-500 max-w-[96px] truncate font-medium px-1">
+                                                            {file.name}
+                                                        </span>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => removeFile(index)}
+                                                            className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-100 flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all z-10 scale-90 group-hover:scale-100"
+                                                        >
+                                                            <X className="h-3.5 w-3.5" />
+                                                        </button>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     )}
 
-                                    {/* Text Input */}
                                     <textarea
                                         ref={textareaRef}
                                         value={inputValue}
@@ -322,7 +334,6 @@ export const AIStarterPage = () => {
                                         className="w-full bg-transparent border-none outline-none text-slate-900 text-base md:text-lg placeholder:text-slate-400 mb-2 px-1 resize-none min-h-[44px] max-h-[200px] py-2 scrollbar-hide"
                                     />
 
-                                    {/* Action Buttons Row */}
                                     <div className="flex items-center justify-between border-t border-slate-50 pt-2 px-1 pb-1">
                                         <div className="flex items-center gap-1">
                                             <button
@@ -366,13 +377,10 @@ export const AIStarterPage = () => {
                                         </div>
 
                                         <div className="flex items-center gap-3">
-                                            {/* Model Selector */}
                                             <div className="relative">
                                                 <button
                                                     type="button"
-                                                    onClick={() =>
-                                                        setShowModelDropdown(!showModelDropdown)
-                                                    }
+                                                    onClick={() => setShowModelDropdown(!showModelDropdown)}
                                                     className="h-10 px-4 rounded-xl border border-slate-100 flex items-center gap-2 text-slate-600 hover:bg-slate-50 hover:border-slate-200 transition-all text-sm font-medium"
                                                 >
                                                     <ModelIcon
@@ -392,7 +400,7 @@ export const AIStarterPage = () => {
                                                 </button>
 
                                                 {showModelDropdown && (
-                                                    <div className="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-20 animate-in fade-in zoom-in-95 duration-200 pointer-events-auto">
+                                                    <div className="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-20 animate-in fade-in zoom-in-95 duration-200">
                                                         <div className="p-2">
                                                             <div className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
                                                                 Pilih Model AI
@@ -446,8 +454,7 @@ export const AIStarterPage = () => {
                                             <button
                                                 type="submit"
                                                 disabled={
-                                                    isLoading ||
-                                                    (!inputValue.trim() && uploadedFiles.length === 0)
+                                                    isLoading || (!inputValue.trim() && uploadedFiles.length === 0)
                                                 }
                                                 className="h-10 w-10 rounded-xl bg-[#2443B0] flex items-center justify-center text-white hover:bg-[#1e3895] transition-all disabled:opacity-30 disabled:grayscale shadow-lg shadow-blue-500/20 active:scale-95"
                                             >
@@ -462,7 +469,6 @@ export const AIStarterPage = () => {
                 </div>
             </div>
 
-            {/* Click Outside Overlay */}
             {showModelDropdown && (
                 <div
                     className="fixed inset-0 z-40 bg-transparent"
