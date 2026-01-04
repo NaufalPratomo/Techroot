@@ -160,9 +160,9 @@ export const AIStarterPage = () => {
     };
 
     return (
-        <div className="relative flex flex-col h-screen w-full bg-white overflow-hidden">
+        <div className="relative flex flex-col h-full w-full bg-white overflow-hidden">
             {/* Background design */}
-            <div className="fixed inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div
                     className="absolute bottom-0 left-0 right-0 h-[60%]"
                     style={{
@@ -175,23 +175,23 @@ export const AIStarterPage = () => {
             </div>
 
             {/* Main Layout Container */}
-            <div className="bottom-0 left-0 right-0 fixed z-10 flex flex-col h-full w-full overflow-hidden">
+            <div className="relative z-10 flex flex-col h-full w-full overflow-hidden">
                 {/* 1. SCROLLABLE CHAT AREA */}
                 <div className="flex-1 w-full pb-16 overflow-y-auto scrollbar-hide">
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col">
                         {messages.length === 0 ? (
                             <div className="flex-1 flex flex-col items-center justify-center py-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-slate-900 text-center leading-tight mb-6">
+                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-slate-900 text-center leading-tight mb-6">
                                     <span className="block italic opacity-40 mb-2">Tanya Root.</span>
                                     <span className="block">Kamu Punya Pertanyaan.</span>
                                     <span className="block">Root Punya Jawaban.</span>
                                 </h1>
-                                <p className="text-slate-500 text-lg md:text-xl text-center max-w-lg">
+                                <p className="text-slate-500 text-base sm:text-lg md:text-xl text-center max-w-lg px-4">
                                     Tanyakan apapun tentang coding. Debug error. Minta contoh kode.
                                 </p>
                             </div>
                         ) : (
-                            <div className="py-28 space-y-8">
+                            <div className="py-20 sm:py-28 space-y-6 sm:space-y-8">
                                 {messages.map((msg, i) => (
                                     <div
                                         key={i}
@@ -257,19 +257,21 @@ export const AIStarterPage = () => {
                 </div>
 
                 {/* 2. BOTTOM INPUT AREA */}
-                <div className="fixed bottom-0 left-0 right-0 z-50">
+                <div className="absolute inset-x-0 bottom-0 z-50 mt-auto">
+                    {/* Layer blur + gradient, pakai absolute */}
                     <div
-                        className="absolute inset-x-0 bottom-0 h-100 bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
+                        className="absolute inset-x-0 bottom-0 h-full bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
                         style={{
                             WebkitMaskImage: "linear-gradient(to top, black 60%, transparent 100%)",
                             maskImage: "linear-gradient(to top, black 60%, transparent 100%)",
                         }}
                     />
 
-                    <div className="pb-16">
+                    {/* Konten form, ini tetap mengikuti posisi fixed di bawah */}
+                    <div className="w-full pb-6 sm:pb-8 md:pb-12 lg:pb-16">
                         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                             <form onSubmit={handleSubmit} className="w-full">
-                                <div className="bg-white rounded-[24px] shadow-2xl border border-slate-200 p-3 md:p-4 transition-all focus-within:ring-4 focus-within:ring-blue-500/5 group">
+                                <div className="bg-white rounded-[24px] shadow-2xl border border-slate-200 p-3 md:p-4 transition-all focus-within:ring-4 focus-within:ring-blue-500/5 focus-within:border-[#2443B0] group">
                                     {uploadedFiles.length > 0 && (
                                         <div className="flex flex-wrap gap-3 mb-4 px-1">
                                             {uploadedFiles.map((file, index) => {
@@ -287,8 +289,7 @@ export const AIStarterPage = () => {
                                                                     src={previewUrl!}
                                                                     alt={file.name}
                                                                     className="h-full w-full object-cover"
-                                                                    onLoad={() => {
-                                                                    }}
+                                                                    onLoad={() => { }}
                                                                 />
                                                             </div>
                                                         ) : (
