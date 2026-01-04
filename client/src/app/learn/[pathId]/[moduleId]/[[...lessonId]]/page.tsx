@@ -198,8 +198,8 @@ export default function ModuleDetail({
 
                     {/* Right Sidebar - Module Navigation */}
                     <aside className={cn(
-                        "transition-all duration-300 border-l border-slate-100 bg-white",
-                        sidebarOpen ? "w-80" : "w-0 overflow-hidden",
+                        "transition-all duration-300 border-l border-slate-100 bg-white h-full",
+                        sidebarOpen ? "w-130" : "w-0 overflow-hidden",
                         "hidden lg:block"
                     )}>
                         <ModuleSidebar

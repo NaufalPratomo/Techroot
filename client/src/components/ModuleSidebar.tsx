@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Link from "next/link";
-import { ChevronDown, ChevronRight, BookOpen, Play, FileQuestion, Check, Circle, Lock } from 'lucide-react';
+import { ChevronDown, ChevronRight, BookOpen, Play, FileQuestion, Check, Circle, MessageSquare } from 'lucide-react';
 import { Module, Section, Lesson } from '@/data/learningPaths';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { DiscussionForum } from './DiscussionForum';
 
 interface ModuleSidebarProps {
   module: Module;
@@ -138,13 +139,13 @@ export const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
   };
 
   return (
-    <div className="w-80 bg-card border-l border-border h-full flex flex-col">
+    <div className="w-full bg-card border-l border-border h-full flex flex-col">
       {/* Tabs */}
-      <Tabs defaultValue="modules" className="flex-1 flex flex-col">
+      <Tabs defaultValue="modules" className="flex-1 flex flex-col h-full overflow-hidden">
         <div className="border-b border-border p-2">
           <TabsList className="w-full grid grid-cols-2">
             <TabsTrigger value="modules" className="text-xs">Daftar Modul</TabsTrigger>
-            <TabsTrigger value="notes" className="text-xs">Catatan Belajar</TabsTrigger>
+            <TabsTrigger value="forum" className="text-xs">Forum Diskusi</TabsTrigger>
           </TabsList>
         </div>
 
@@ -174,12 +175,8 @@ export const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
           </div>
         </TabsContent>
 
-        <TabsContent value="notes" className="flex-1 m-0 p-4">
-          <div className="text-center py-8 text-muted-foreground">
-            <BookOpen className="h-12 w-12 mx-auto mb-3 opacity-50" />
-            <p className="text-sm">Belum ada catatan</p>
-            <p className="text-xs mt-1">Catatan belajar Anda akan muncul di sini</p>
-          </div>
+        <TabsContent value="forum" className="flex-1 h-full m-0 overflow-hidden flex flex-col">
+          <DiscussionForum />
         </TabsContent>
       </Tabs>
     </div>
