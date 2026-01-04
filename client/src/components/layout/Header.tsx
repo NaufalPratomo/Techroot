@@ -61,25 +61,27 @@ export function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-6">
-                    <Link
-                        href="/paths"
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        Jalur Belajar
-                    </Link>
-                    <Link
-                        href="/playground"
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        Playground
-                    </Link>
                     {isAuthenticated && (
-                        <Link
-                            href="/dashboard"
-                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            Dashboard
-                        </Link>
+                        <>
+                            <Link
+                                href="/paths"
+                                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                Jalur Belajar
+                            </Link>
+                            <Link
+                                href="/playground"
+                                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                Playground
+                            </Link>
+                            <Link
+                                href="/roadmap"
+                                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                Roadmap
+                            </Link>
+                        </>
                     )}
                 </nav>
 
