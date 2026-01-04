@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Lesson } from '@/data/learningPaths';
-import { CodePlayground } from './CodePlayground';
+import CodePlayground from '@/components/CodePlayground';
 import { Button } from '@/components/ui/button';
 import { Play, CheckCircle, BookOpen, Video, FileQuestion } from 'lucide-react';
 import { cn } from '@/lib/utils';
