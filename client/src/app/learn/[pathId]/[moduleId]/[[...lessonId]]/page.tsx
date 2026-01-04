@@ -135,7 +135,7 @@ export default function ModuleDetail({
     };
 
     return (
-        <div className="min-h-screen bg-white flex">
+        <div className="h-screen bg-white flex overflow-hidden">
             {/* Left Sidebar - Icons */}
             {activeTab === 'materi' && (
                 <LearningSidebar
@@ -149,7 +149,7 @@ export default function ModuleDetail({
             {/* Main Content */}
             <div className="flex-1 flex flex-col min-w-0">
                 {/* Header */}
-                <header className="h-14 border-b border-slate-100 flex items-center justify-between px-4 bg-white shadow-sm">
+                <header className="h-14 border-b border-slate-100 flex items-center justify-between px-4 bg-white shadow-sm sticky top-0 z-30">
                     {activeTab === 'materi' ? (
                         <Link
                             href={`/paths/${pathId}`}

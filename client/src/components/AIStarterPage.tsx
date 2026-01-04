@@ -24,17 +24,17 @@ const requestedModels = [
         color: "#4285F4"
     },
     {
-        id: "openai/gpt-oss-120b:free",
-        name: "GPT OSS 120B",
-        description: "OpenAI (Free)",
-        brand: "openai",
+        id: "xiaomi/mimo-v2-flash:free",
+        name: "Mimo V2 Flash",
+        description: "Xiaomi (Free)",
+        brand: "xiaomi",
         color: "#10a37f"
     },
     {
-        id: "qwen/qwen3-coder:free",
-        name: "Qwen 3 Coder",
-        description: "Alibaba (Free)",
-        brand: "alibaba",
+        id: "nvidia/nemotron-3-nano-30b-a3b:free",
+        name: "Nemotron 3 Nano",
+        description: "Nvidia (Free)",
+        brand: "nvidia",
         color: "#ff6a00"
     },
     {
@@ -47,25 +47,44 @@ const requestedModels = [
 ];
 
 const ModelIcon = ({ brand, color, className }: { brand: string, color: string, className?: string }) => {
+    const [error, setError] = React.useState(false);
+
+    // List brand yang kita tahu ada gambarnya di /public/assets/model/
+    const availableImages = ["google", "nvidia", "deepseek", "xiaomi"];
+
+    if (availableImages.includes(brand) && !error) {
+        return (
+            <img
+                src={`/assets/model/${brand}.png`}
+                alt={brand}
+                className={cn("object-contain", className)}
+                onError={() => setError(true)}
+            />
+        );
+    }
+
+    // Fallback if image not found or not in list
     switch (brand) {
         case "google":
-            return (
-                <svg viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05" />
-                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335" />
-                </svg>
-            );
-        case "openai":
-            return (
-                <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5153-4.9066 6.0462 6.0462 0 0 0-4.7471-3.1243 5.9847 5.9847 0 0 0-5.9114 2.8106 5.9847 5.9847 0 0 0-5.3619 1.5767 6.0462 6.0462 0 0 0-1.2581 5.5034 5.9847 5.9847 0 0 0-.5153 4.9066 6.0462 6.0462 0 0 0 4.7471 3.1243 5.3418 5.3418 0 0 0 1.2581.1488 5.9847 5.9847 0 0 0 4.6533-2.1931 5.9847 5.9847 0 0 0 5.3619-1.5767 6.0462 6.0462 0 0 0 1.2581-5.5034 5.9847 5.9847 0 0 0 .5847-.7915zM12 14.8647a2.8617 2.8617 0 0 1-2.4776-1.4285l3.8994-2.2533a.6253.6253 0 0 0 .3126-.5414V5.4190l3.053 1.7631a.0051.0051 0 0 1 .0026.0044v7.6782zm-2.8143-1.0182l-3.8994-2.2533a.0051.0051 0 0 1-.0026-.0044V3.903l3.053 1.7631a.6253.6253 0 0 0 .6252 0l3.8994-2.2533v4.4996a.6253.6253 0 0 0 .3126.5414l3.8994 2.2533zm-4.143 5.617a.0051.0051 0 0 1-.0026-.0044V11.7809l3.053 1.7631a.6305.6305 0 0 0 .3126.0845.6253.6253 0 0 0 .3126-.0845l3.8994-2.2533v4.4996a.6253.6253 0 0 0 .3126.5414l-3.8994 2.2533zm11.9143-7.6782l-3.053-1.7631a.6305.6305 0 0 0-.3126-.0845.6253.6253 0 0 0-.3126.0845l-3.8994 2.2533V7.669a.6253.6253 0 0 0-.3126-.5414l-3.8994-2.2533L12 3.1112l3.053 1.7631a.0051.0051 0 0 1 .0026.0044zm2.143-4.4996a.6253.6253 0 0 0-.3126-.5414l-3.8994-2.2533V3.1112l3.8994 2.2533a.0051.0051 0 0 1 .0026.0044v7.6782l-3.053-1.7631a.6253.6253 0 0 0-.6252 0l-3.8994 2.2533V4.0247zm-5.143 14.8647l-3.053-1.7631a.0051.0051 0 0 1-.0026-.0044v-7.6782l3.8994 2.2533a.6253.6253 0 0 0 .6252 0l3.8994-2.2533v4.4996a.6253.6253 0 0 0-.3126.5414z" />
-                </svg>
-            );
+            return <Bot className={className} style={{ color }} />; // Fallback to Bot for Google if image fails
         default:
             return <Cpu className={className} style={{ color }} />;
     }
+};
+
+const FormattedContent = ({ content }: { content: string }) => {
+    // Sederhana: ubah **teks** menjadi <strong>teks</strong>
+    const parts = content.split(/(\*\*.*?\*\*)/g);
+    return (
+        <div className="text-sm md:text-base whitespace-pre-wrap leading-relaxed opacity-95">
+            {parts.map((part, i) => {
+                if (part.startsWith("**") && part.endsWith("**")) {
+                    return <strong key={i} className="font-bold text-slate-900">{part.slice(2, -2)}</strong>;
+                }
+                return part;
+            })}
+        </div>
+    );
 };
 
 export const AIStarterPage = () => {
@@ -177,7 +196,7 @@ export const AIStarterPage = () => {
             {/* Main Layout Container */}
             <div className="relative z-10 flex flex-col h-full w-full overflow-hidden">
                 {/* 1. SCROLLABLE CHAT AREA */}
-                <div className="flex-1 w-full pb-16 overflow-y-auto scrollbar-hide">
+                <div className="flex-1 w-full pb-32 overflow-y-auto scrollbar-hide">
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col">
                         {messages.length === 0 ? (
                             <div className="flex-1 flex flex-col items-center justify-center py-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -208,24 +227,24 @@ export const AIStarterPage = () => {
                                                     : "bg-blue-600 border-blue-400 text-white"
                                             )}
                                         >
-                                            {msg.role === "user" ? (
-                                                <User className="h-5 w-5" />
-                                            ) : (
-                                                <Bot className="h-5 w-5" />
-                                            )}
+                                            <div className="h-6 w-6 overflow-hidden rounded-full flex items-center justify-center bg-white/10">
+                                                {msg.role === "user" ? (
+                                                    <User className="h-5 w-5" />
+                                                ) : (
+                                                    <Bot className="h-5 w-5" />
+                                                )}
+                                            </div>
                                         </div>
 
                                         <div
                                             className={cn(
-                                                "max-w-[80%] rounded-[24px] p-5 shadow-sm transition-all hover:shadow-md",
+                                                "max-w-[85%] rounded-[24px] px-4 py-3 shadow-sm transition-all hover:shadow-md",
                                                 msg.role === "user"
                                                     ? "bg-[#2443B0] text-white rounded-tr-none"
                                                     : "bg-white border border-slate-100 text-slate-800 rounded-tl-none"
                                             )}
                                         >
-                                            <div className="text-sm md:text-base whitespace-pre-wrap leading-relaxed opacity-95">
-                                                {msg.content}
-                                            </div>
+                                            <FormattedContent content={msg.content} />
                                         </div>
                                     </div>
                                 ))}
@@ -237,7 +256,7 @@ export const AIStarterPage = () => {
                                         </div>
                                         <div className="bg-white border border-slate-100 rounded-[24px] p-5 rounded-tl-none shadow-sm flex flex-col gap-3 min-w-[200px]">
                                             <div className="flex items-center gap-2">
-                                                <div className="h-2 w-2 bg-blue-600 rounded-full animate-bounce" />
+                                                <div className="h-2 w-2 bg-blue-600 rounded-full" />
                                                 <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">
                                                     Root sedang merespon
                                                 </span>
@@ -256,16 +275,16 @@ export const AIStarterPage = () => {
                     </div>
                 </div>
 
-                <div
-                    className="absolute inset-x-0 bottom-0 h-full bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
-                    style={{
-                        WebkitMaskImage: "linear-gradient(to top, black 60%, transparent 100%)",
-                        maskImage: "linear-gradient(to top, black 60%, transparent 100%)",
-                    }}
-                />
 
                 {/* 2. BOTTOM INPUT AREA */}
                 <div className="fixed inset-x-0 bottom-0 z-50">
+                    <div
+                        className="absolute inset-x-0 bottom-0 h-full bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
+                        style={{
+                            WebkitMaskImage: "linear-gradient(to top, black 60%, transparent 100%)",
+                            maskImage: "linear-gradient(to top, black 60%, transparent 100%)",
+                        }}
+                    />
                     {/* Wrapper absolute di dalam fixed (kalau kamu mau main di dalam parent tertentu) */}
                     <div className="absolute inset-x-0 bottom-0 mt-auto">
                         {/* Konten form */}
@@ -400,54 +419,68 @@ export const AIStarterPage = () => {
                                                     </button>
 
                                                     {showModelDropdown && (
-                                                        <div className="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-20 animate-in fade-in zoom-in-95 duration-200">
-                                                            <div className="p-2">
-                                                                <div className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-                                                                    Pilih Model AI
-                                                                </div>
-                                                                <div className="space-y-1">
-                                                                    {requestedModels.map((model) => (
-                                                                        <button
-                                                                            key={model.id}
-                                                                            type="button"
-                                                                            onClick={() => {
-                                                                                setSelectedModel(model);
-                                                                                setShowModelDropdown(false);
-                                                                            }}
-                                                                            className={cn(
-                                                                                "w-full flex items-start gap-4 p-3 rounded-xl text-left transition-all",
-                                                                                selectedModel.id === model.id
-                                                                                    ? "bg-blue-50 text-[#2443B0]"
-                                                                                    : "hover:bg-slate-50 text-slate-600"
-                                                                            )}
-                                                                        >
-                                                                            <div
+                                                        <>
+                                                            {/* Backdrop khusus untuk dropdown ini agar stack-nya benar */}
+                                                            <div
+                                                                className="fixed inset-0 z-[100] bg-transparent"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    setShowModelDropdown(false);
+                                                                }}
+                                                            />
+                                                            <div
+                                                                className="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-[101] animate-in fade-in zoom-in-95 duration-200"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                            >
+                                                                <div className="p-2">
+                                                                    <div className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                                                                        Pilih Model AI
+                                                                    </div>
+                                                                    <div className="space-y-1">
+                                                                        {requestedModels.map((model) => (
+                                                                            <button
+                                                                                key={model.id}
+                                                                                type="button"
+                                                                                onClick={() => {
+                                                                                    console.log("Selecting model:", model.name);
+                                                                                    setSelectedModel(model);
+                                                                                    setShowModelDropdown(false);
+                                                                                }}
                                                                                 className={cn(
-                                                                                    "p-2 rounded-lg",
+                                                                                    "w-full flex items-start gap-4 p-3 rounded-xl text-left transition-all cursor-pointer group relative z-[102]",
                                                                                     selectedModel.id === model.id
-                                                                                        ? "bg-white shadow-sm"
-                                                                                        : "bg-slate-100 opacity-60"
+                                                                                        ? "bg-blue-50 text-[#2443B0]"
+                                                                                        : "hover:bg-slate-50 text-slate-600"
                                                                                 )}
                                                                             >
-                                                                                <ModelIcon
-                                                                                    brand={model.brand}
-                                                                                    color={model.color}
-                                                                                    className="h-4 w-4"
-                                                                                />
-                                                                            </div>
-                                                                            <div>
-                                                                                <div className="font-bold text-sm leading-tight">
-                                                                                    {model.name}
+                                                                                <div
+                                                                                    className={cn(
+                                                                                        "p-2 rounded-lg transition-transform group-hover:scale-110",
+                                                                                        selectedModel.id === model.id
+                                                                                            ? "bg-white shadow-sm"
+                                                                                            : "bg-slate-100"
+                                                                                    )}
+                                                                                >
+                                                                                    <ModelIcon
+                                                                                        brand={model.brand}
+                                                                                        color={model.color}
+                                                                                        className="h-4 w-4"
+                                                                                    />
                                                                                 </div>
-                                                                                <div className="text-[11px] opacity-60 mt-0.5">
-                                                                                    {model.description}
+                                                                                <div className="relative z-10">
+                                                                                    <div className="font-bold text-sm leading-tight">
+                                                                                        {model.name}
+                                                                                    </div>
+                                                                                    <div className="text-[11px] opacity-70 mt-0.5">
+                                                                                        {model.description}
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        </button>
-                                                                    ))}
+                                                                            </button>
+                                                                        ))}
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </>
                                                     )}
                                                 </div>
 
@@ -469,13 +502,6 @@ export const AIStarterPage = () => {
                     </div>
                 </div>
             </div>
-
-            {showModelDropdown && (
-                <div
-                    className="fixed inset-0 z-40 bg-transparent"
-                    onClick={() => setShowModelDropdown(false)}
-                />
-            )}
         </div>
     );
 };
