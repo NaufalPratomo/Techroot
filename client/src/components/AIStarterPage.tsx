@@ -232,8 +232,8 @@ export const AIStarterPage = () => {
 
                                 {isLoading && (
                                     <div className="flex w-full animate-in fade-in duration-300 gap-3">
-                                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-lg border border-blue-400 animate-pulse">
-                                            <Bot className="h-5 w-5 text-white animate-spin-slow" />
+                                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-lg border border-blue-400">
+                                            <Bot className="h-5 w-5 text-white" />
                                         </div>
                                         <div className="bg-white border border-slate-100 rounded-[24px] p-5 rounded-tl-none shadow-sm flex flex-col gap-3 min-w-[200px]">
                                             <div className="flex items-center gap-2">
@@ -256,213 +256,215 @@ export const AIStarterPage = () => {
                     </div>
                 </div>
 
+                <div
+                    className="absolute inset-x-0 bottom-0 h-full bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
+                    style={{
+                        WebkitMaskImage: "linear-gradient(to top, black 60%, transparent 100%)",
+                        maskImage: "linear-gradient(to top, black 60%, transparent 100%)",
+                    }}
+                />
+
                 {/* 2. BOTTOM INPUT AREA */}
-                <div className="absolute inset-x-0 bottom-0 z-50 mt-auto">
-                    {/* Layer blur + gradient, pakai absolute */}
-                    <div
-                        className="absolute inset-x-0 bottom-0 h-full bg-white/40 backdrop-blur-xl border-t border-slate-100 -z-10 mask-gradient-bottom"
-                        style={{
-                            WebkitMaskImage: "linear-gradient(to top, black 60%, transparent 100%)",
-                            maskImage: "linear-gradient(to top, black 60%, transparent 100%)",
-                        }}
-                    />
+                <div className="fixed inset-x-0 bottom-0 z-50">
+                    {/* Wrapper absolute di dalam fixed (kalau kamu mau main di dalam parent tertentu) */}
+                    <div className="absolute inset-x-0 bottom-0 mt-auto">
+                        {/* Konten form */}
+                        <div className="w-full pb-6 sm:pb-8 md:pb-12 lg:pb-16">
+                            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <form onSubmit={handleSubmit} className="w-full">
+                                    <div className="bg-white rounded-[24px] shadow-2xl border border-slate-200 p-3 md:p-4 transition-all focus-within:ring-4 focus-within:ring-blue-500/5 focus-within:border-[#2443B0] group">
+                                        {uploadedFiles.length > 0 && (
+                                            <div className="flex flex-wrap gap-3 mb-4 px-1">
+                                                {uploadedFiles.map((file, index) => {
+                                                    const isImage = file.type.startsWith("image/");
+                                                    const previewUrl = isImage ? URL.createObjectURL(file) : null;
 
-                    {/* Konten form, ini tetap mengikuti posisi fixed di bawah */}
-                    <div className="w-full pb-6 sm:pb-8 md:pb-12 lg:pb-16">
-                        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <form onSubmit={handleSubmit} className="w-full">
-                                <div className="bg-white rounded-[24px] shadow-2xl border border-slate-200 p-3 md:p-4 transition-all focus-within:ring-4 focus-within:ring-blue-500/5 focus-within:border-[#2443B0] group">
-                                    {uploadedFiles.length > 0 && (
-                                        <div className="flex flex-wrap gap-3 mb-4 px-1">
-                                            {uploadedFiles.map((file, index) => {
-                                                const isImage = file.type.startsWith("image/");
-                                                const previewUrl = isImage ? URL.createObjectURL(file) : null;
-
-                                                return (
-                                                    <div
-                                                        key={index}
-                                                        className="group relative flex flex-col items-center gap-2 bg-slate-50 border border-slate-100 rounded-2xl p-2 transition-all hover:shadow-md animate-in zoom-in-95 duration-200"
-                                                    >
-                                                        {isImage ? (
-                                                            <div className="relative h-24 w-24 overflow-hidden rounded-xl bg-slate-100">
-                                                                <img
-                                                                    src={previewUrl!}
-                                                                    alt={file.name}
-                                                                    className="h-full w-full object-cover"
-                                                                    onLoad={() => { }}
-                                                                />
-                                                            </div>
-                                                        ) : (
-                                                            <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-blue-50/50">
-                                                                <FileText className="h-10 w-10 text-blue-500" />
-                                                            </div>
-                                                        )}
-
-                                                        <span className="text-[10px] text-slate-500 max-w-[96px] truncate font-medium px-1">
-                                                            {file.name}
-                                                        </span>
-
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => removeFile(index)}
-                                                            className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-100 flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all z-10 scale-90 group-hover:scale-100"
+                                                    return (
+                                                        <div
+                                                            key={index}
+                                                            className="group relative flex flex-col items-center gap-2 bg-slate-50 border border-slate-100 rounded-2xl p-2 transition-all hover:shadow-md animate-in zoom-in-95 duration-200"
                                                         >
-                                                            <X className="h-3.5 w-3.5" />
-                                                        </button>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    )}
+                                                            {isImage ? (
+                                                                <div className="relative h-24 w-24 overflow-hidden rounded-xl bg-slate-100">
+                                                                    <img
+                                                                        src={previewUrl!}
+                                                                        alt={file.name}
+                                                                        className="h-full w-full object-cover"
+                                                                        onLoad={() => { }}
+                                                                    />
+                                                                </div>
+                                                            ) : (
+                                                                <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-blue-50/50">
+                                                                    <FileText className="h-10 w-10 text-blue-500" />
+                                                                </div>
+                                                            )}
 
-                                    <textarea
-                                        ref={textareaRef}
-                                        value={inputValue}
-                                        onChange={(e) => {
-                                            setInputValue(e.target.value);
-                                            adjustTextareaHeight();
-                                        }}
-                                        onKeyDown={handleKeyDown}
-                                        disabled={isLoading}
-                                        placeholder={
-                                            isLoading
-                                                ? "Root sedang bekerja..."
-                                                : "Apa masalah coding yang sedang kamu hadapi?"
-                                        }
-                                        rows={1}
-                                        className="w-full bg-transparent border-none outline-none text-slate-900 text-base md:text-lg placeholder:text-slate-400 mb-2 px-1 resize-none min-h-[44px] max-h-[200px] py-2 scrollbar-hide"
-                                    />
+                                                            <span className="text-[10px] text-slate-500 max-w-[96px] truncate font-medium px-1">
+                                                                {file.name}
+                                                            </span>
 
-                                    <div className="flex items-center justify-between border-t border-slate-50 pt-2 px-1 pb-1">
-                                        <div className="flex items-center gap-1">
-                                            <button
-                                                type="button"
-                                                onClick={() => fileInputRef.current?.click()}
-                                                className="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#2443B0] transition-all"
-                                                title="Attach file"
-                                            >
-                                                <Paperclip className="h-5 w-5" />
-                                            </button>
-                                            <button
-                                                type="button"
-                                                onClick={() => imageInputRef.current?.click()}
-                                                className="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#2443B0] transition-all"
-                                                title="Upload image"
-                                            >
-                                                <ImageIcon className="h-5 w-5" />
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#2443B0] transition-all"
-                                                title="Voice input"
-                                            >
-                                                <Mic className="h-5 w-5" />
-                                            </button>
-                                            <input
-                                                ref={fileInputRef}
-                                                type="file"
-                                                multiple
-                                                onChange={handleFileUpload}
-                                                className="hidden"
-                                            />
-                                            <input
-                                                ref={imageInputRef}
-                                                type="file"
-                                                multiple
-                                                onChange={handleFileUpload}
-                                                accept="image/*"
-                                                className="hidden"
-                                            />
-                                        </div>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => removeFile(index)}
+                                                                className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-100 flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all z-10 scale-90 group-hover:scale-100"
+                                                            >
+                                                                <X className="h-3.5 w-3.5" />
+                                                            </button>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
 
-                                        <div className="flex items-center gap-3">
-                                            <div className="relative">
+                                        <textarea
+                                            ref={textareaRef}
+                                            value={inputValue}
+                                            onChange={(e) => {
+                                                setInputValue(e.target.value);
+                                                adjustTextareaHeight();
+                                            }}
+                                            onKeyDown={handleKeyDown}
+                                            disabled={isLoading}
+                                            placeholder={
+                                                isLoading
+                                                    ? "Root sedang bekerja..."
+                                                    : "Apa masalah coding yang sedang kamu hadapi?"
+                                            }
+                                            rows={1}
+                                            className="w-full bg-transparent border-none outline-none text-slate-900 text-base md:text-lg placeholder:text-slate-400 mb-2 px-1 resize-none min-h-[44px] max-h-[200px] py-2 scrollbar-hide"
+                                        />
+
+                                        <div className="flex items-center justify-between border-t border-slate-50 pt-2 px-1 pb-1">
+                                            <div className="flex items-center gap-1">
                                                 <button
                                                     type="button"
-                                                    onClick={() => setShowModelDropdown(!showModelDropdown)}
-                                                    className="h-10 px-4 rounded-xl border border-slate-100 flex items-center gap-2 text-slate-600 hover:bg-slate-50 hover:border-slate-200 transition-all text-sm font-medium"
+                                                    onClick={() => fileInputRef.current?.click()}
+                                                    className="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#2443B0] transition-all"
+                                                    title="Attach file"
                                                 >
-                                                    <ModelIcon
-                                                        brand={selectedModel.brand}
-                                                        color={selectedModel.color}
-                                                        className="h-4 w-4"
-                                                    />
-                                                    <span className="hidden sm:inline lowercase">
-                                                        {selectedModel.name}
-                                                    </span>
-                                                    <ChevronDown
-                                                        className={cn(
-                                                            "h-3.5 w-3.5 transition-transform duration-200",
-                                                            showModelDropdown && "rotate-180"
-                                                        )}
-                                                    />
+                                                    <Paperclip className="h-5 w-5" />
                                                 </button>
-
-                                                {showModelDropdown && (
-                                                    <div className="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-20 animate-in fade-in zoom-in-95 duration-200">
-                                                        <div className="p-2">
-                                                            <div className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-                                                                Pilih Model AI
-                                                            </div>
-                                                            <div className="space-y-1">
-                                                                {requestedModels.map((model) => (
-                                                                    <button
-                                                                        key={model.id}
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            setSelectedModel(model);
-                                                                            setShowModelDropdown(false);
-                                                                        }}
-                                                                        className={cn(
-                                                                            "w-full flex items-start gap-4 p-3 rounded-xl text-left transition-all",
-                                                                            selectedModel.id === model.id
-                                                                                ? "bg-blue-50 text-[#2443B0]"
-                                                                                : "hover:bg-slate-50 text-slate-600"
-                                                                        )}
-                                                                    >
-                                                                        <div
-                                                                            className={cn(
-                                                                                "p-2 rounded-lg",
-                                                                                selectedModel.id === model.id
-                                                                                    ? "bg-white shadow-sm"
-                                                                                    : "bg-slate-100 opacity-60"
-                                                                            )}
-                                                                        >
-                                                                            <ModelIcon
-                                                                                brand={model.brand}
-                                                                                color={model.color}
-                                                                                className="h-4 w-4"
-                                                                            />
-                                                                        </div>
-                                                                        <div>
-                                                                            <div className="font-bold text-sm leading-tight">
-                                                                                {model.name}
-                                                                            </div>
-                                                                            <div className="text-[11px] opacity-60 mt-0.5">
-                                                                                {model.description}
-                                                                            </div>
-                                                                        </div>
-                                                                    </button>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )}
+                                                <button
+                                                    type="button"
+                                                    onClick={() => imageInputRef.current?.click()}
+                                                    className="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#2443B0] transition-all"
+                                                    title="Upload image"
+                                                >
+                                                    <ImageIcon className="h-5 w-5" />
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    className="p-2.5 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-[#2443B0] transition-all"
+                                                    title="Voice input"
+                                                >
+                                                    <Mic className="h-5 w-5" />
+                                                </button>
+                                                <input
+                                                    ref={fileInputRef}
+                                                    type="file"
+                                                    multiple
+                                                    onChange={handleFileUpload}
+                                                    className="hidden"
+                                                />
+                                                <input
+                                                    ref={imageInputRef}
+                                                    type="file"
+                                                    multiple
+                                                    onChange={handleFileUpload}
+                                                    accept="image/*"
+                                                    className="hidden"
+                                                />
                                             </div>
 
-                                            <button
-                                                type="submit"
-                                                disabled={
-                                                    isLoading || (!inputValue.trim() && uploadedFiles.length === 0)
-                                                }
-                                                className="h-10 w-10 rounded-xl bg-[#2443B0] flex items-center justify-center text-white hover:bg-[#1e3895] transition-all disabled:opacity-30 disabled:grayscale shadow-lg shadow-blue-500/20 active:scale-95"
-                                            >
-                                                <ArrowRight className="h-5 w-5" />
-                                            </button>
+                                            <div className="flex items-center gap-3">
+                                                <div className="relative">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setShowModelDropdown(!showModelDropdown)}
+                                                        className="h-10 px-4 rounded-xl border border-slate-100 flex items-center gap-2 text-slate-600 hover:bg-slate-50 hover:border-slate-200 transition-all text-sm font-medium"
+                                                    >
+                                                        <ModelIcon
+                                                            brand={selectedModel.brand}
+                                                            color={selectedModel.color}
+                                                            className="h-4 w-4"
+                                                        />
+                                                        <span className="hidden sm:inline lowercase">
+                                                            {selectedModel.name}
+                                                        </span>
+                                                        <ChevronDown
+                                                            className={cn(
+                                                                "h-3.5 w-3.5 transition-transform duration-200",
+                                                                showModelDropdown && "rotate-180"
+                                                            )}
+                                                        />
+                                                    </button>
+
+                                                    {showModelDropdown && (
+                                                        <div className="absolute bottom-full right-0 mb-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-20 animate-in fade-in zoom-in-95 duration-200">
+                                                            <div className="p-2">
+                                                                <div className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                                                                    Pilih Model AI
+                                                                </div>
+                                                                <div className="space-y-1">
+                                                                    {requestedModels.map((model) => (
+                                                                        <button
+                                                                            key={model.id}
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                setSelectedModel(model);
+                                                                                setShowModelDropdown(false);
+                                                                            }}
+                                                                            className={cn(
+                                                                                "w-full flex items-start gap-4 p-3 rounded-xl text-left transition-all",
+                                                                                selectedModel.id === model.id
+                                                                                    ? "bg-blue-50 text-[#2443B0]"
+                                                                                    : "hover:bg-slate-50 text-slate-600"
+                                                                            )}
+                                                                        >
+                                                                            <div
+                                                                                className={cn(
+                                                                                    "p-2 rounded-lg",
+                                                                                    selectedModel.id === model.id
+                                                                                        ? "bg-white shadow-sm"
+                                                                                        : "bg-slate-100 opacity-60"
+                                                                                )}
+                                                                            >
+                                                                                <ModelIcon
+                                                                                    brand={model.brand}
+                                                                                    color={model.color}
+                                                                                    className="h-4 w-4"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div className="font-bold text-sm leading-tight">
+                                                                                    {model.name}
+                                                                                </div>
+                                                                                <div className="text-[11px] opacity-60 mt-0.5">
+                                                                                    {model.description}
+                                                                                </div>
+                                                                            </div>
+                                                                        </button>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                <button
+                                                    type="submit"
+                                                    disabled={
+                                                        isLoading || (!inputValue.trim() && uploadedFiles.length === 0)
+                                                    }
+                                                    className="h-10 w-10 rounded-xl bg-[#2443B0] flex items-center justify-center text-white hover:bg-[#1e3895] transition-all disabled:opacity-30 disabled:grayscale shadow-lg shadow-blue-500/20 active:scale-95"
+                                                >
+                                                    <ArrowRight className="h-5 w-5" />
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

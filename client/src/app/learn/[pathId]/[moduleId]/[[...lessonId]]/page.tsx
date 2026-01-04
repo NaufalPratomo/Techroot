@@ -137,43 +137,57 @@ export default function ModuleDetail({
     return (
         <div className="min-h-screen bg-white flex">
             {/* Left Sidebar - Icons */}
-            <LearningSidebar
-                pathTitle={path.title}
-                pathId={pathId!}
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-            />
+            {activeTab === 'materi' && (
+                <LearningSidebar
+                    pathTitle={path.title}
+                    pathId={pathId!}
+                    activeTab={activeTab}
+                    onTabChange={setActiveTab}
+                />
+            )}
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col min-w-0">
                 {/* Header */}
                 <header className="h-14 border-b border-slate-100 flex items-center justify-between px-4 bg-white shadow-sm">
-                    <Link
-                        href={`/paths/${pathId}`}
-                        className="flex items-center gap-2 text-sm hover:text-[#2443B0] transition-colors text-slate-500"
-                    >
-                        <ArrowLeft className="h-4 w-4" />
-                        <span className="hidden sm:inline font-medium">{path.title}</span>
-                    </Link>
-
-                    <div className="flex items-center gap-3">
-                        {/* Search */}
-                        <button className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-500 bg-slate-50 rounded-full hover:bg-slate-100 transition-colors border border-slate-100">
-                            <Search className="h-4 w-4" />
-                            <span className="hidden md:inline">Cari modul/konten</span>
-                            <kbd className="hidden lg:inline ml-2 px-1.5 py-0.5 text-xs bg-white rounded border border-slate-200 text-slate-400">
-                                CTRL /
-                            </kbd>
-                        </button>
-
-                        {/* Toggle Sidebar */}
-                        <button
-                            onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="h-9 w-9 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors lg:hidden border border-slate-100"
+                    {activeTab === 'materi' ? (
+                        <Link
+                            href={`/paths/${pathId}`}
+                            className="flex items-center gap-2 text-sm hover:text-[#2443B0] transition-colors text-slate-500"
                         >
-                            {sidebarOpen ? <X className="h-5 w-5 text-slate-600" /> : <Menu className="h-5 w-5 text-slate-600" />}
+                            <ArrowLeft className="h-4 w-4" />
+                            <span className="hidden sm:inline font-medium">{path.title}</span>
+                        </Link>
+                    ) : (
+                        <button
+                            onClick={() => setActiveTab('materi')}
+                            className="flex items-center gap-2 text-sm hover:text-[#2443B0] transition-colors text-slate-500 font-medium"
+                        >
+                            <ArrowLeft className="h-4 w-4" />
+                            <span>Kembali ke materi</span>
                         </button>
-                    </div>
+                    )}
+
+                    {activeTab === 'materi' && (
+                        <div className="flex items-center gap-3">
+                            {/* Search */}
+                            <button className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-500 bg-slate-50 rounded-full hover:bg-slate-100 transition-colors border border-slate-100">
+                                <Search className="h-4 w-4" />
+                                <span className="hidden md:inline">Cari modul/konten</span>
+                                <kbd className="hidden lg:inline ml-2 px-1.5 py-0.5 text-xs bg-white rounded border border-slate-200 text-slate-400">
+                                    CTRL /
+                                </kbd>
+                            </button>
+
+                            {/* Toggle Sidebar */}
+                            <button
+                                onClick={() => setSidebarOpen(!sidebarOpen)}
+                                className="h-9 w-9 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors lg:hidden border border-slate-100"
+                            >
+                                {sidebarOpen ? <X className="h-5 w-5 text-slate-600" /> : <Menu className="h-5 w-5 text-slate-600" />}
+                            </button>
+                        </div>
+                    )}
                 </header>
 
                 {/* Content Area */}
@@ -199,7 +213,7 @@ export default function ModuleDetail({
                     {/* Right Sidebar - Module Navigation */}
                     <aside className={cn(
                         "transition-all duration-300 border-l border-slate-100 bg-white h-full",
-                        sidebarOpen ? "w-130" : "w-0 overflow-hidden",
+                        (sidebarOpen && activeTab === 'materi') ? "w-130" : "w-0 overflow-hidden",
                         "hidden lg:block"
                     )}>
                         <ModuleSidebar
@@ -214,7 +228,7 @@ export default function ModuleDetail({
             </div>
 
             {/* Mobile Sidebar Overlay */}
-            {sidebarOpen && (
+            {sidebarOpen && activeTab === 'materi' && (
                 <div className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" onClick={() => setSidebarOpen(false)}>
                     <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center justify-end p-4 border-b border-slate-100">
@@ -237,14 +251,16 @@ export default function ModuleDetail({
             )}
 
             {/* Bottom Navigation */}
-            <LessonNavigation
-                pathId={pathId!}
-                moduleId={moduleId!}
-                prevLesson={prevLesson}
-                nextLesson={nextLesson}
-                currentLessonTitle={lesson.title}
-                currentLessonXP={lesson.xpReward}
-            />
+            {activeTab === 'materi' && (
+                <LessonNavigation
+                    pathId={pathId!}
+                    moduleId={moduleId!}
+                    prevLesson={prevLesson}
+                    nextLesson={nextLesson}
+                    currentLessonTitle={lesson.title}
+                    currentLessonXP={lesson.xpReward}
+                />
+            )}
         </div>
     );
 }

@@ -74,8 +74,8 @@ export const BadgeDisplay: React.FC = () => {
               className={cn(
                 'border rounded-lg p-4 text-center transition-all',
                 isEarned
-                  ? 'border-foreground/20 bg-secondary'
-                  : 'border-border opacity-50 grayscale'
+                  ? 'border-2 border-[#2443B0] bg-white'
+                  : 'border-2 border-border opacity-50 grayscale'
               )}
             >
               <div className="relative w-16 h-16 mx-auto mb-2">
