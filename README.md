@@ -78,15 +78,118 @@ Kami mengintegrasikan teknologi LLM terbaik untuk berbagai kebutuhan:
 
 ```bash
 Techroot/
-├── 📱 client/            # Jantung antarmuka pengguna
-│   ├── src/app/          # Rute dan logika halaman (Next.js)
-│   ├── src/components/   # Komponen UI atomik & premium
-│   └── public/assets/    # Aset visual & logo model AI
-├── ⚙️ server/            # Otak pemrosesan data
-│   ├── api/              # Definisi endpoint REST
-│   └── src/              # Logic server & controller
-└── 📦 README.md          # Peta jalan dokumentasi ini
+│
+├── 📱 client/                          # Frontend Next.js Application
+│   ├── public/                         # Static assets
+│   │   ├── assets/                     # Media files
+│   │   │   ├── hero-students.png       # Hero section image
+│   │   │   ├── logo.png                # Techroot logo
+│   │   │   └── model/                  # AI brand logos (google, nvidia, etc.)
+│   │   └── polinema.png                # Partner logo
+│   │
+│   └── src/                            # Source code
+│       ├── app/                        # Next.js App Router (Pages)
+│       │   ├── (auth)/                 # Auth pages group
+│       │   │   ├── login/              # Login page
+│       │   │   └── register/           # Registration page
+│       │   ├── dashboard/              # User dashboard
+│       │   ├── learn/                  # Learning interface
+│       │   ├── paths/                  # Learning paths catalog
+│       │   │   └── [pathId]/           # Dynamic path details
+│       │   ├── playground/             # Code playground page
+│       │   ├── roadmap/                # AI Roadmap Wizard
+│       │   ├── result/                 # Quiz result page
+│       │   ├── layout.tsx              # Root layout
+│       │   ├── page.tsx                # Landing page (Home)
+│       │   └── globals.css             # Global styles
+│       │
+│       ├── components/                 # React Components
+│       │   ├── layout/
+│       │   │   └── Header.tsx          # Navigation header
+│       │   ├── ui/                     # Shadcn UI Components
+│       │   │   ├── button.tsx
+│       │   │   ├── card.tsx
+│       │   │   ├── dialog.tsx
+│       │   │   ├── dropdown-menu.tsx
+│       │   │   ├── tabs.tsx
+│       │   │   ├── toast.tsx
+│       │   │   └── ... (20+ components)
+│       │   ├── AIStarterPage.tsx       # AI Chat interface (Tanya Root)
+│       │   ├── CodePlayground.tsx      # Multi-language code editor
+│       │   ├── DiscussionForum.tsx     # Module discussion forum
+│       │   ├── LessonContent.tsx       # Lesson renderer (material/video/quiz)
+│       │   ├── LearningSidebar.tsx     # Learning navigation sidebar
+│       │   ├── ModuleSidebar.tsx       # Module navigation
+│       │   ├── ModuleCard.tsx          # Module card component
+│       │   ├── PathCard.tsx            # Learning path card
+│       │   ├── BadgeDisplay.tsx        # Achievement badges
+│       │   └── StatsDisplay.tsx        # XP/Level/Streak stats
+│       │
+│       ├── constants/                  # Static data & configurations
+│       │   ├── index.ts                # Barrel export
+│       │   ├── ai.ts                   # AI model configurations
+│       │   └── landing.ts              # Landing page data (categories, testimonials)
+│       │
+│       ├── context/
+│       │   └── UserContext.tsx         # Global user state (auth, progress, XP)
+│       │
+│       ├── data/
+│       │   └── learningPaths.ts        # Learning curriculum data & helpers
+│       │
+│       ├── hooks/                      # Custom React hooks
+│       │   ├── use-mobile.tsx          # Mobile detection hook
+│       │   └── use-toast.ts            # Toast notification hook
+│       │
+│       ├── lib/                        # Utilities & helpers
+│       │   ├── api.ts                  # API client & storage helpers
+│       │   ├── helpers.ts              # Common utility functions
+│       │   ├── supabase.ts             # Supabase client initialization
+│       │   └── utils.ts                # cn() classname utility
+│       │
+│       └── types/
+│           └── index.ts                # TypeScript interfaces (User, Progress, etc.)
+│
+├── ⚙️ server/                          # Backend Express.js API
+│   ├── api/
+│   │   └── index.ts                    # Vercel serverless entry point
+│   │
+│   └── src/
+│       ├── config/
+│       │   └── env.ts                  # Environment configuration
+│       │
+│       ├── lib/
+│       │   └── supabase.ts             # Supabase client
+│       │
+│       ├── middleware/
+│       │   └── auth.ts                 # JWT authentication middleware
+│       │
+│       ├── routes/                     # API endpoints
+│       │   ├── ai.route.ts             # POST /api/ai/chat - AI chat proxy
+│       │   ├── auth.route.ts           # POST /api/auth/* - Authentication
+│       │   ├── discussion.route.ts     # GET/POST /api/discussions/:moduleId
+│       │   ├── health.route.ts         # GET /api/health - Server health check
+│       │   └── progress.route.ts       # GET/POST /api/progress/* - User progress
+│       │
+│       ├── app.ts                      # Express app configuration
+│       └── server.ts                   # Server entry point
+│
+├── 📄 README.md                        # Project documentation
+├── 📄 vercel.json                      # Vercel deployment config
+└── 📄 .gitignore                       # Git ignore rules
 ```
+
+### 📁 Arsitektur Kode (Clean Code)
+
+| Layer         | Folder                      | Deskripsi                            |
+| ------------- | --------------------------- | ------------------------------------ |
+| **Types**     | `client/src/types/`         | Semua TypeScript interfaces terpusat |
+| **Constants** | `client/src/constants/`     | Data statis & konfigurasi            |
+| **Utilities** | `client/src/lib/`           | Helper functions & API client        |
+| **State**     | `client/src/context/`       | Global state management              |
+| **Data**      | `client/src/data/`          | Learning curriculum & helpers        |
+| **UI**        | `client/src/components/ui/` | Shadcn reusable components           |
+| **Features**  | `client/src/components/`    | Feature-specific components          |
+| **Pages**     | `client/src/app/`           | Next.js App Router pages             |
 
 ---
 
