@@ -215,8 +215,8 @@ export default function ModuleDetail({
 
             {/* Mobile Sidebar Overlay */}
             {sidebarOpen && (
-                <div className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm">
-                    <div className="absolute right-0 top-0 h-full bg-white shadow-2xl">
+                <div className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" onClick={() => setSidebarOpen(false)}>
+                    <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center justify-end p-4 border-b border-slate-100">
                             <button
                                 onClick={() => setSidebarOpen(false)}
