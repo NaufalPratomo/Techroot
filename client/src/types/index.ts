@@ -14,6 +14,15 @@ export interface Badge {
     earned_at: string;
 }
 
+export interface BadgeDefinition {
+    id: string;
+    name: string;
+    icon: any;
+    color: string;
+    bg: string;
+    description: string;
+}
+
 export interface Progress {
     completedLessons: string[];
     completedModules: string[];
