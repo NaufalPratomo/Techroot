@@ -10,13 +10,7 @@
 
 ---
 
-## 🌟 Visi Narrative
-
-Di tengah belantara informasi teknologi yang meluap, banyak pengembang berbakat layu sebelum berkembang karena kehilangan arah. **Techroot** hadir sebagai nutrisi digital yang memandu setiap individu melalui jalur yang unik—sesuai kecepatan, mimpi, dan cara mereka belajar. Kami percaya bahwa setiap pengembang hebat tumbuh dari akar yang kuat, dan AI adalah katalisator terbaik untuk mempercepat pertumbuhan itu.
-
----
-
-## 🚀 Fitur Unggulan
+## 🚀 Fitur Unggulan Terkini
 
 ### 🗺️ AI Roadmap Wizard
 
@@ -24,200 +18,115 @@ Lupakan kurikulum kaku yang sama untuk semua orang. Dengan **AI Roadmap Wizard**
 
 ### 🤖 Tanya Root (The AI Tutor)
 
-Bingung dengan konsep _Recursion_? Error _Undefined is not a function_ bikin pening? **Tanya Root** adalah asisten yang selalu siaga di setiap halaman materi. Ia bukan sekadar chatbot; ia adalah tutor yang mengenal konteks belajar Anda dan mampu memberikan solusi instan.
+Bingung dengan konsep _Recursion_? Error _Undefined is not a function_ bikin pening? **Tanya Root** adalah asisten yang selalu siaga di setiap halaman materi. Ia menggunakan konteks modul yang sedang Anda pelajari untuk memberikan bimbingan instan.
 
-### 💻 Integrated Code Playground
+### 📊 Dynamic Mastery Dashboard
 
-Belajar tanpa praktik adalah mimpi di siang bolong. Techroot menyediakan **Playground** langsung di browser. Tulis kode, jalankan, dan lihat hasilnya tanpa perlu instalasi lingkungan yang rumit di perangkat Anda.
+Visualisasi progres belajar yang sepenuhnya dinamis. Menampilkan **XP**, **Level**, **Streak**, serta jumlah modul dan pelajaran yang telah diselesaikan secara real-time dari database.
 
-### 🏆 Gamified Growth
+### 👤 Responsive Profile Management
 
-Dapatkan **XP** dan koleksi **Badge** eksklusif setiap kali Anda menyelesaikan modul. Progres Anda terekam secara real-time, memberikan kepuasan visual atas setiap inci pertumbuhan keahlian Anda.
+Kelola identitas digital Anda dengan sistem profil yang cerdas:
 
----
-
-## 🧩 Masalah & Solusi
-
-| Masalah                                                        | Solusi Techroot                                                         |
-| :------------------------------------------------------------- | :---------------------------------------------------------------------- |
-| **Paradox of Choice**: Kebingungan memilih ribuan tutorial.    | **AI Curated Paths**: Jalur belajar tunggal yang paling relevan.        |
-| **Cold Start Problem**: Sulit mulai belajar teknologi baru.    | **Guided Wizard**: Pengarahan langkah demi langkah sejak menit pertama. |
-| **Learning Blockers**: Macet karena error yang sulit dipahami. | **Contextual AI Assistance**: Bantuan teknis yang memahami modul Anda.  |
+- **Desktop**: Dialog modal yang elegan untuk pembaruan cepat.
+- **Mobile/Tablet**: _Standard-compliant bottom sheet_ (drawer) untuk aksesibilitas maksimal.
+- **Avatar Customization**: Integrasi dengan **DiceBear API (Thumbs collection)** untuk ribuan variasi karakter unik.
 
 ---
 
 ## 🛠️ Arsitektur & Teknologi
 
-Techroot dibangun dengan prinsip modernitas dan performa tinggi:
+Techroot dibangun dengan prinsip modernitas, performa tinggi, dan skalabilitas:
 
-### 🎨 Frontend Performance
+### 🎨 Frontend Ecosystem
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router & Server Components)
-- **UI Engine**: [React 19](https://react.dev/)
-- **Visuals**: [Tailwind CSS 4](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
-- **Micro-Animations**: Custom CSS Transitions & Framer Motion logic.
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router & Turbopack)
+- **UI Engine**: [React 19](https://react.dev/) dengan _Concurrent Rendering_
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) untuk fleksibilitas desain premium.
+- **Components**: [Shadcn UI](https://ui.shadcn.com/) (Radix UI) yang dikustomisasi penuh.
 
 ### ⚙️ Backend & Intelligence
 
-- **Server**: [Express 5](https://expressjs.com/) on Node.js
-- **Persistence**: [PostgreSQL via Supabase](https://supabase.com/)
-- **Authentication**: [Supabase Auth](https://supabase.com/auth)
-
-### 🧠 AI Brains (The Roots)
-
-Kami mengintegrasikan teknologi LLM terbaik untuk berbagai kebutuhan:
-
-- 🔵 **Google Gemma 3**: Otak utama untuk struktur roadmap.
-- 🟢 **Xiaomi Mimo V2**: Respons cepat untuk dialog ringan.
-- 🟠 **Nvidia Nemotron**: Spesialis logika teknis dan arsitektur.
-- 🔴 **Deepseek R1**: _Deep reasoning_ untuk tantangan coding yang kompleks.
+- **Platform**: Node.js dengan [Express 5](https://expressjs.com/)
+- **Database**: [PostgreSQL (Supabase)](https://supabase.com/)
+- **AI Engines**: Deepseek R1, Google Gemma 3, Nvidia Nemotron.
 
 ---
 
-## 📂 Struktur Folder
+## 📂 Struktur Folder & Fungsi (Clean Architecture)
 
 ```bash
 Techroot/
 │
 ├── 📱 client/                          # Frontend Next.js Application
-│   ├── public/                         # Static assets
-│   │   ├── assets/                     # Media files
-│   │   │   ├── hero-students.png       # Hero section image
-│   │   │   ├── logo.png                # Techroot logo
-│   │   │   └── model/                  # AI brand logos (google, nvidia, etc.)
-│   │   └── polinema.png                # Partner logo
-│   │
-│   └── src/                            # Source code
-│       ├── app/                        # Next.js App Router (Pages)
-│       │   ├── (auth)/                 # Auth pages group
-│       │   │   ├── login/              # Login page
-│       │   │   └── register/           # Registration page
-│       │   ├── dashboard/              # User dashboard
-│       │   ├── learn/                  # Learning interface
-│       │   ├── paths/                  # Learning paths catalog
-│       │   │   └── [pathId]/           # Dynamic path details
-│       │   ├── playground/             # Code playground page
-│       │   ├── roadmap/                # AI Roadmap Wizard
-│       │   ├── result/                 # Quiz result page
-│       │   ├── layout.tsx              # Root layout
-│       │   ├── page.tsx                # Landing page (Home)
-│       │   └── globals.css             # Global styles
-│       │
-│       ├── components/                 # React Components
-│       │   ├── layout/
-│       │   │   └── Header.tsx          # Navigation header
-│       │   ├── ui/                     # Shadcn UI Components
-│       │   │   ├── button.tsx
-│       │   │   ├── card.tsx
-│       │   │   ├── dialog.tsx
-│       │   │   ├── dropdown-menu.tsx
-│       │   │   ├── tabs.tsx
-│       │   │   ├── toast.tsx
-│       │   │   └── ... (20+ components)
-│       │   ├── AIStarterPage.tsx       # AI Chat interface (Tanya Root)
-│       │   ├── CodePlayground.tsx      # Multi-language code editor
-│       │   ├── DiscussionForum.tsx     # Module discussion forum
-│       │   ├── LessonContent.tsx       # Lesson renderer (material/video/quiz)
-│       │   ├── LearningSidebar.tsx     # Learning navigation sidebar
-│       │   ├── ModuleSidebar.tsx       # Module navigation
-│       │   ├── ModuleCard.tsx          # Module card component
-│       │   ├── PathCard.tsx            # Learning path card
-│       │   ├── BadgeDisplay.tsx        # Achievement badges
-│       │   └── StatsDisplay.tsx        # XP/Level/Streak stats
-│       │
-│       ├── constants/                  # Static data & configurations
-│       │   ├── index.ts                # Barrel export
-│       │   ├── ai.ts                   # AI model configurations
-│       │   └── landing.ts              # Landing page data (categories, testimonials)
-│       │
-│       ├── context/
-│       │   └── UserContext.tsx         # Global user state (auth, progress, XP)
-│       │
-│       ├── data/
-│       │   └── learningPaths.ts        # Learning curriculum data & helpers
-│       │
-│       ├── hooks/                      # Custom React hooks
-│       │   ├── use-mobile.tsx          # Mobile detection hook
-│       │   └── use-toast.ts            # Toast notification hook
-│       │
-│       ├── lib/                        # Utilities & helpers
-│       │   ├── api.ts                  # API client & storage helpers
-│       │   ├── helpers.ts              # Common utility functions
-│       │   ├── supabase.ts             # Supabase client initialization
-│       │   └── utils.ts                # cn() classname utility
-│       │
-│       └── types/
-│           └── index.ts                # TypeScript interfaces (User, Progress, etc.)
+│   ├── src/
+│   │   ├── app/                        # [Fungsi] Root Navigasi & Halaman Utama.
+│   │   │   ├── profile/                # Menangani Profile Page & Edit Logic (Modal/Sheet).
+│   │   │   ├── learn/                  # Antarmuka pembelajaran interaktif (Video/Materi).
+│   │   │   └── roadmap/                # Alur pembuatan Roadmap otomatis berbasis AI.
+│   │   ├── components/                 # [Fungsi] Reusable UI unit.
+│   │   │   ├── layout/                 # Komponen struktur global (Header, Footer, Sidebar).
+│   │   │   └── ui/                     # Komponen atomik (Buttons, Dialogs) dari Shadcn.
+│   │   ├── context/                    # [Fungsi] Centralized State (UserContext).
+│   │   │                               # Mengatur auth, XP, & progress di seluruh aplikasi.
+│   │   ├── lib/                        # [Fungsi] Utilities & Service client (API, Supabase).
+│   │   └── types/                      # [Fungsi] TypeScript Definitions (Antarmuka Kontrak Data).
+│   └── next.config.ts                  # Konfigurasi Next.js (Image optimization, dll).
 │
 ├── ⚙️ server/                          # Backend Express.js API
-│   ├── api/
-│   │   └── index.ts                    # Vercel serverless entry point
-│   │
-│   └── src/
-│       ├── config/
-│       │   └── env.ts                  # Environment configuration
-│       │
-│       ├── lib/
-│       │   └── supabase.ts             # Supabase client
-│       │
-│       ├── middleware/
-│       │   └── auth.ts                 # JWT authentication middleware
-│       │
-│       ├── routes/                     # API endpoints
-│       │   ├── ai.route.ts             # POST /api/ai/chat - AI chat proxy
-│       │   ├── auth.route.ts           # POST /api/auth/* - Authentication
-│       │   ├── discussion.route.ts     # GET/POST /api/discussions/:moduleId
-│       │   ├── health.route.ts         # GET /api/health - Server health check
-│       │   └── progress.route.ts       # GET/POST /api/progress/* - User progress
-│       │
-│       ├── app.ts                      # Express app configuration
-│       └── server.ts                   # Server entry point
+│   ├── src/
+│   │   ├── routes/                     # [Fungsi] API Endpoints (Auth, AI, Progress).
+│   │   ├── middleware/                 # [Fungsi] Security Layer (JWT & Rate Limiting).
+│   │   └── lib/                        # [Fungsi] Database & External Service Connection.
+│   └── server.ts                       # Entry Point API.
 │
-├── 📄 README.md                        # Project documentation
-├── 📄 vercel.json                      # Vercel deployment config
-└── 📄 .gitignore                       # Git ignore rules
+└── 📄 README.md                        # Project Documentation.
 ```
 
-### 📁 Arsitektur Kode (Clean Code)
+---
 
-| Layer         | Folder                      | Deskripsi                            |
-| ------------- | --------------------------- | ------------------------------------ |
-| **Types**     | `client/src/types/`         | Semua TypeScript interfaces terpusat |
-| **Constants** | `client/src/constants/`     | Data statis & konfigurasi            |
-| **Utilities** | `client/src/lib/`           | Helper functions & API client        |
-| **State**     | `client/src/context/`       | Global state management              |
-| **Data**      | `client/src/data/`          | Learning curriculum & helpers        |
-| **UI**        | `client/src/components/ui/` | Shadcn reusable components           |
-| **Features**  | `client/src/components/`    | Feature-specific components          |
-| **Pages**     | `client/src/app/`           | Next.js App Router pages             |
+## 🔄 Alur Data Dinamis (Deep Dive)
+
+Aplikasi Techroot bekerja dengan sinkronisasi data real-time antara Client dan server melalui beberapa mekanisme utama:
+
+### 1. Siklus Autentikasi & Sesi
+
+- **Initial Load**: Saat aplikasi dibuka, Client memeriksa JWT di storage dan memanggil `/api/auth/me`.
+- **Persistence**: Server memvalidasi token melalui Middleware. Jika valid, data user dikirim ke Client dan disimpan di `UserContext` untuk menghindari "flicker" saat navigasi.
+
+### 2. Gamifikasi & Sinkronisasi Progress
+
+- **Aksi Belajar**: Setiap kali user menyelesaikan kuis atau materi, Client mengirimkan request ke `/api/progress/lesson`.
+- **Logic Server**: Server memvalidasi integritas data, menghitung XP, dan memperbarui tabel `user_progress` serta data `streak` di database.
+- **Live UI Update**: Response sukses dari server akan memicu update `UserContext` secara instan, sehingga bar progres dan level di dashboard berubah tanpa perlu refresh halaman.
+
+### 3. Ekosistem AI Tutoring (Tanya Root)
+
+- **Konteks**: Client mengirimkan pertanyaan beserta context modul yang sedang dipelajari ke `/api/ai/chat`.
+- **Proxying**: Server bertindak sebagai perantara (proxy) untuk menyuntikkan API Key secara aman sebelum diteruskan ke provider LLM (Deepseek/Google/Nvidia).
+- **Hasil**: Jawaban dikembalikan sebagai streaming atau JSON terstruktur untuk ditampilkan langsung di UI asisten.
+
+### 4. Manajemen UI Responsif (Adaptive Layout)
+
+- **Decision Engine**: Aplikasi menggunakan hook `use-mobile` untuk mendeteksi ukuran layar secara real-time.
+- **Switching**: Jika layar < 1024px (Mobile/Tablet), fitur Edit Profil akan dirender sebagai `Sheet` (Bottom Drawer). Jika > 1024px, fitur tersebut akan menggunakan `Dialog` (Modal Tengah). Ini memastikan UX yang native di setiap perangkat.
 
 ---
 
-## � Timeline Pengerjaan
-
-- **Minggu 1 (Des 2025)**: Perancangan Arsitektur & Integrasi Database.
-- **Minggu 2 (Des 2025)**: Pengembangan AI Roadmap Wizard.
-- **Minggu 3 (Jan 2026)**: Implementasi Tanya Root & Code Playground.
-- **Minggu 4 (Jan 2026)**: Polishing UI, Gamifikasi, & Final QA.
-
----
-
-## 👥 Kontributor
-
-Proyek ini tumbuh berkat dedikasi dari para pengembang berikut:
+## 👥 Tim Kontributor
 
 - **Riovaldo Alfiyan Fahmi Rahman** ([@ckckckcz](https://github.com/ckckckcz)) - _Lead Architect & Fullstack Developer_
 - **Naufal Pratomo** ([@NaufalPratomo](https://github.com/NaufalPratomo)) - _Data Researcher_
-- **Antigravity AI** - _AI Development Assistant_
 
 ---
 
 ## 📄 Lisensi
 
-Techroot dilisensikan di bawah [MIT License](LICENSE). Mari membangun ekosistem edukasi yang lebih baik bersama-sama!
+Techroot dilisensikan di bawah [MIT License](LICENSE). Mari membangun ekosistem edukasi yang lebih cerdas bersama-sama!
 
 ---
 
 <p align="center">
-  Didesain dengan perhatian pada detail dan didorong oleh masa depan AI.
+  <b>Built with ❤️ at Techroot Dev Labs</b><br>
+  <i>"Growing Great Developers from Strong Roots"</i>
 </p>
