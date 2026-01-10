@@ -468,7 +468,7 @@ export default function ProfilePage() {
 
             {/* Desktop Edit Modal */}
             <Dialog open={!isMobile && isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-                <DialogContent className="sm:max-w-[500px] border-none shadow-2xl rounded-[2.5rem] p-8">
+                <DialogContent className="sm:max-w-[500px] border-none shadow-2xl rounded-3xl p-8">
                     <DialogHeader className="space-y-3 pb-4">
                         <DialogTitle className="text-3xl font-black tracking-tight text-[#2443B0]">Edit Profil</DialogTitle>
                         <DialogDescription className="text-slate-500 font-bold">
@@ -481,8 +481,8 @@ export default function ProfilePage() {
 
             {/* Mobile/Tablet Bottom Sheet */}
             <Sheet open={isMobile && isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-                <SheetContent side="bottom" className="rounded-t-[3rem] border-none shadow-2xl p-8 pb-12 focus:outline-none">
-                    <SheetHeader className="space-y-2 pb-4 text-left">
+                <SheetContent side="bottom" className="rounded-t-3xl border-none shadow-2xl p-4 pb-12 focus:outline-none">
+                    <SheetHeader className="space-y-2 text-left p-4">
                         <SheetTitle className="text-3xl font-black tracking-tight text-[#2443B0]">Edit Profil</SheetTitle>
                         <SheetDescription className="text-slate-500 font-bold">
                             Perbarui informasi profil Anda di sini.
