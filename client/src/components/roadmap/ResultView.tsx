@@ -21,13 +21,13 @@ export const ResultView = ({ roadmapData, onReset, onViewTopicDetail }: ResultVi
                     <Rocket className="h-4 w-4 mr-2" />
                     Roadmap Berhasil Dibuat
                 </div>
-                <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 leading-tight">Jalur Belajar Personal Kamu</h2>
-                <p className="text-lg text-slate-500 max-w-3xl font-medium leading-relaxed">
+                <h2 className="text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 leading-tight">Jalur Belajar Personal Kamu</h2>
+                <p className="text-base lg:text-lg text-slate-500 max-w-3xl font-medium leading-relaxed">
                     {roadmapData?.overview || "Berikut adalah struktur pembelajaran yang kami rekomendasikan berdasarkan profilmu."}
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-4 lg:gap-6">
                 {roadmapData?.nodes.map((node, idx) => {
                     const isCheckpoint = node.type === "checkpoint";
                     return (
@@ -38,7 +38,7 @@ export const ResultView = ({ roadmapData, onReset, onViewTopicDetail }: ResultVi
                                 isCheckpoint ? "border-[#D7FE44] bg-[#D7FE44]/5" : "border-slate-100"
                             )}
                         >
-                            <div className="p-8 space-y-6">
+                            <div className="p-5 lg:p-8 space-y-4 lg:space-y-6">
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                     <div className="flex items-center gap-3">
                                         <div className={cn(
@@ -60,28 +60,28 @@ export const ResultView = ({ roadmapData, onReset, onViewTopicDetail }: ResultVi
                                         <Button
                                             variant="ghost"
                                             size="sm"
-                                            className="rounded-full h-9 px-4 text-xs font-bold border border-slate-100 bg-white hover:bg-slate-50 cursor-pointer"
+                                            className="rounded-full h-8 lg:h-9 px-3 lg:px-4 text-[10px] lg:text-xs font-bold border border-slate-100 bg-white hover:bg-slate-50 cursor-pointer"
                                             onClick={() => onViewTopicDetail(node, "resources")}
                                         >
-                                            <BookOpen className="h-3.5 w-3.5 mr-2" />
+                                            <BookOpen className="h-3 w-3 lg:h-3.5 lg:w-3.5 mr-1 lg:mr-2" />
                                             Detail Materi
                                         </Button>
                                         <Button
                                             size="sm"
-                                            className="rounded-full h-9 px-4 text-xs font-bold bg-[#2443B0] text-white hover:bg-[#1a36a9] cursor-pointer"
+                                            className="rounded-full h-8 lg:h-9 px-3 lg:px-4 text-[10px] lg:text-xs font-bold bg-[#2443B0] text-white hover:bg-[#1a36a9] cursor-pointer"
                                             onClick={() => onViewTopicDetail(node, "tutor")}
                                         >
-                                            <Sparkles className="h-3.5 w-3.5 mr-2" />
+                                            <Sparkles className="h-3 w-3 lg:h-3.5 lg:w-3.5 mr-1 lg:mr-2" />
                                             AI Tutor
                                         </Button>
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <h3 className="text-2xl font-black text-slate-900 group-hover:text-[#2443B0] transition-colors">
+                                    <h3 className="text-xl lg:text-2xl font-black text-slate-900 group-hover:text-[#2443B0] transition-colors">
                                         {node.title}
                                     </h3>
-                                    <p className="text-slate-500 font-medium leading-relaxed max-w-4xl">
+                                    <p className="text-sm lg:text-base text-slate-500 font-medium leading-relaxed max-w-4xl">
                                         {node.description}
                                     </p>
                                 </div>

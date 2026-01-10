@@ -273,11 +273,11 @@ Pertanyaan Pengguna: ${tutorInput}`;
                             }}
                         />
                     ) : (
-                        <div className="flex flex-col gap-8 lg:flex-row items-start">
+                        <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row items-start">
                             <RoadmapSidebar currentStep={step} getStepNumber={getStepNumber} />
 
                             <main className="flex-1 w-full">
-                                <div className="bg-white rounded-xl border-2 border-border p-6 sm:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] min-h-[600px] flex flex-col">
+                                <div className="bg-white rounded-xl border-2 border-border p-5 sm:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.05)] min-h-[500px] lg:min-h-[600px] flex flex-col">
                                     <div className="flex-1">
                                         {step === "purpose" && <PurposeStep value={formData.purpose} onChange={(v) => updateField("purpose", v)} />}
                                         {step === "field" && <FieldStep value={formData.field} onChange={(v) => updateField("field", v)} />}
