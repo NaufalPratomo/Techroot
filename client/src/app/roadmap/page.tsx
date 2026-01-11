@@ -303,13 +303,13 @@ Pertanyaan Pengguna: ${tutorInput}`;
                                     </div>
 
                                     {step !== "generating" && (
-                                        <div className="mt-12 flex items-center justify-between border-t border-slate-100 pt-8">
+                                        <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-0 border-t border-slate-100 pt-6 sm:pt-8 px-4 sm:px-0">
                                             <Button
                                                 variant="ghost"
                                                 size="lg"
                                                 onClick={prevStep}
                                                 disabled={step === "purpose"}
-                                                className="rounded-xl px-6 h-12 font-bold text-slate-400 hover:text-slate-600 hover:bg-slate-50 gap-2 cursor-pointer"
+                                                className="w-full sm:w-auto rounded-xl px-6 h-12 font-bold text-slate-400 hover:text-slate-600 hover:bg-slate-50 gap-2 cursor-pointer order-2 sm:order-1"
                                             >
                                                 <ArrowLeft className="h-5 w-5" />
                                                 Sebelumnya
@@ -319,7 +319,7 @@ Pertanyaan Pengguna: ${tutorInput}`;
                                                 onClick={step === "confirm" ? handleGenerateRoadmap : nextStep}
                                                 disabled={!canProceed()}
                                                 className={cn(
-                                                    "rounded-xl px-4 h-12 font-black shadow-lg transition-all gap-2 cursor-pointer",
+                                                    "w-full sm:w-auto rounded-xl px-6 sm:px-8 h-12 font-black shadow-lg transition-all gap-2 cursor-pointer order-1 sm:order-2",
                                                     step === "confirm"
                                                         ? "bg-[#D7FE44] text-[#1a1a1a] hover:bg-[#c4ea3d] hover:scale-105"
                                                         : "bg-[#2443B0] text-white hover:bg-[#1a36a9]"

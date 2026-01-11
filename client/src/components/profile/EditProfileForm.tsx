@@ -10,6 +10,7 @@ import { useImageUpload } from "@/hooks/useImageUpload"
 import { PhotoUploadSection } from "./PhotoUploadSection"
 import { AvatarSelectionGrid } from "./AvatarSelectionGrid"
 import { ProfileInputFields } from "./ProfileInputFields"
+import { ImageCropDialog } from "./ImageCropDialog"
 import type { EditProfileFormProps, ProfileFormData, User } from "@/types"
 
 export const EditProfileForm = ({ user, onUpdateSuccess, onClose, isMobile = false }: EditProfileFormProps) => {
@@ -23,9 +24,13 @@ export const EditProfileForm = ({ user, onUpdateSuccess, onClose, isMobile = fal
 
     const {
         uploadedImage,
+        tempImageForCrop,
         isUploading,
+        showCropDialog,
         fileInputRef,
         handleImageUpload,
+        handleCropComplete,
+        handleCropCancel,
         removeUploadedImage,
         triggerFileInput,
     } = useImageUpload()
@@ -43,11 +48,9 @@ export const EditProfileForm = ({ user, onUpdateSuccess, onClose, isMobile = fal
         setFormData(prev => ({ ...prev, avatar: AVATAR_OPTIONS[0] }))
     }
 
-    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const base64 = await handleImageUpload(e)
-        if (base64) {
-            setFormData(prev => ({ ...prev, avatar: base64 }))
-        }
+    const onCropComplete = (croppedImage: string) => {
+        handleCropComplete(croppedImage)
+        setFormData(prev => ({ ...prev, avatar: croppedImage }))
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -105,7 +108,7 @@ export const EditProfileForm = ({ user, onUpdateSuccess, onClose, isMobile = fal
                             ref={fileInputRef}
                             type="file"
                             accept="image/*"
-                            onChange={handleImageChange}
+                            onChange={handleImageUpload}
                             className="hidden"
                         />
 
@@ -139,56 +142,78 @@ export const EditProfileForm = ({ user, onUpdateSuccess, onClose, isMobile = fal
                         Simpan Perubahan
                     </Button>
                 </div>
+
+                {/* Crop Dialog */}
+                {tempImageForCrop && (
+                    <ImageCropDialog
+                        open={showCropDialog}
+                        imageSrc={tempImageForCrop}
+                        onCropComplete={onCropComplete}
+                        onClose={handleCropCancel}
+                    />
+                )}
             </>
         )
     }
 
     // Desktop layout (original)
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 pt-4">
-            <PhotoUploadSection
-                userName={formData.name}
-                currentAvatar={formData.avatar}
-                uploadedImage={uploadedImage}
-                isUploading={isUploading}
-                onUploadClick={triggerFileInput}
-                onRemoveClick={handleRemoveImage}
-            />
+        <>
+            <form onSubmit={handleSubmit} className="space-y-6 pt-4">
+                <PhotoUploadSection
+                    userName={formData.name}
+                    currentAvatar={formData.avatar}
+                    uploadedImage={uploadedImage}
+                    isUploading={isUploading}
+                    onUploadClick={triggerFileInput}
+                    onRemoveClick={handleRemoveImage}
+                />
 
-            <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-            />
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                />
 
-            <AvatarSelectionGrid
-                avatarOptions={AVATAR_OPTIONS}
-                selectedAvatar={formData.avatar}
-                onSelectAvatar={handleAvatarSelect}
-                isVisible={!uploadedImage}
-            />
+                <AvatarSelectionGrid
+                    avatarOptions={AVATAR_OPTIONS}
+                    selectedAvatar={formData.avatar}
+                    onSelectAvatar={handleAvatarSelect}
+                    isVisible={!uploadedImage}
+                />
 
-            <ProfileInputFields
-                formData={formData}
-                onChange={handleFieldChange}
-            />
+                <ProfileInputFields
+                    formData={formData}
+                    onChange={handleFieldChange}
+                />
 
-            <div className="pt-2">
-                <Button
-                    type="submit"
-                    disabled={isSubmitting || isUploading}
-                    className="w-full h-14 rounded-2xl bg-[#2443B0] hover:bg-[#1a36a9] text-white font-black shadow-xl shadow-[#2443B0]/20 transition-all gap-3"
-                >
-                    {isSubmitting ? (
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                    ) : (
-                        <Check className="h-5 w-5" />
-                    )}
-                    Simpan Perubahan
-                </Button>
-            </div>
-        </form>
+                <div className="pt-2">
+                    <Button
+                        type="submit"
+                        disabled={isSubmitting || isUploading}
+                        className="w-full h-14 rounded-2xl bg-[#2443B0] hover:bg-[#1a36a9] text-white font-black shadow-xl shadow-[#2443B0]/20 transition-all gap-3"
+                    >
+                        {isSubmitting ? (
+                            <Loader2 className="h-5 w-5 animate-spin" />
+                        ) : (
+                            <Check className="h-5 w-5" />
+                        )}
+                        Simpan Perubahan
+                    </Button>
+                </div>
+            </form>
+
+            {/* Crop Dialog */}
+            {tempImageForCrop && (
+                <ImageCropDialog
+                    open={showCropDialog}
+                    imageSrc={tempImageForCrop}
+                    onCropComplete={onCropComplete}
+                    onClose={handleCropCancel}
+                />
+            )}
+        </>
     )
 }

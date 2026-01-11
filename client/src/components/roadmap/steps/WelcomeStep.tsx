@@ -22,15 +22,14 @@ export const WelcomeStep = ({ onNext }: WelcomeStepProps) => {
                         AI-Powered Learning Path
                     </div>
                     <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 leading-[1.1]">
-                        Bangun Roadmap Belajar <br />
-                        <span className="text-[#2443B0]">Yang Personal & Goat 🚀</span>
+                        Bangun Roadmap Belajar <span className="text-[#2443B0]">Yang Personal & Goat 🚀</span>
                     </h1>
                     <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium">
                         Jawab beberapa pertanyaan singkat, lalu biarkan AI kami menyusun jalur belajar terstruktur yang dirancang khusus untuk mempercepat karirmu.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto pt-4">
+                <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto pt-4">
                     {[
                         { icon: Clock, label: "± 2-3 Menit Selesai", color: "text-blue-500" },
                         { icon: Cpu, label: "Powered by Gemma 3", color: "text-purple-500" },

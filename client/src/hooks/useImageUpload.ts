@@ -4,7 +4,9 @@ import { validateImageFile, convertImageToBase64 } from "@/lib/imageUpload"
 
 export const useImageUpload = () => {
     const [uploadedImage, setUploadedImage] = useState<string | null>(null)
+    const [tempImageForCrop, setTempImageForCrop] = useState<string | null>(null)
     const [isUploading, setIsUploading] = useState(false)
+    const [showCropDialog, setShowCropDialog] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const { toast } = useToast()
 
@@ -27,9 +29,10 @@ export const useImageUpload = () => {
 
         try {
             const base64String = await convertImageToBase64(file)
-            setUploadedImage(base64String)
+            // Set temp image and show crop dialog
+            setTempImageForCrop(base64String)
+            setShowCropDialog(true)
             setIsUploading(false)
-            return base64String
         } catch (error) {
             toast({
                 variant: "destructive",
@@ -37,7 +40,21 @@ export const useImageUpload = () => {
                 description: error instanceof Error ? error.message : "Terjadi kesalahan",
             })
             setIsUploading(false)
-            return null
+        }
+    }
+
+    const handleCropComplete = (croppedImage: string) => {
+        setUploadedImage(croppedImage)
+        setTempImageForCrop(null)
+        setShowCropDialog(false)
+    }
+
+    const handleCropCancel = () => {
+        setTempImageForCrop(null)
+        setShowCropDialog(false)
+        // Clear file input
+        if (fileInputRef.current) {
+            fileInputRef.current.value = ""
         }
     }
 
@@ -54,9 +71,13 @@ export const useImageUpload = () => {
 
     return {
         uploadedImage,
+        tempImageForCrop,
         isUploading,
+        showCropDialog,
         fileInputRef,
         handleImageUpload,
+        handleCropComplete,
+        handleCropCancel,
         removeUploadedImage,
         triggerFileInput,
     }

@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react"
+import { Check } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 
@@ -43,7 +43,7 @@ export const AvatarSelectionGrid = ({
                         {selectedAvatar === avatarUrl && (
                             <div className="absolute inset-0 bg-[#2443B0]/10 flex items-center justify-center">
                                 <div className="bg-[#2443B0] text-white rounded-full p-1">
-                                    <ShieldCheck className="w-3 h-3" />
+                                    <Check className="w-3 h-3" />
                                 </div>
                             </div>
                         )}
