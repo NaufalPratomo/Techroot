@@ -24,5 +24,5 @@ export const env = {
     jwtSecret: JWT_SECRET || 'techroot-secret-key-change-in-production',
     githubClientId: GITHUB_CLIENT_ID || '',
     githubClientSecret: GITHUB_CLIENT_SECRET || '',
-    frontendUrl: FRONTEND_URL || 'https://techroot-olive.vercel.app/',
+    frontendUrl: FRONTEND_URL || 'http://localhost:3000',
 };
