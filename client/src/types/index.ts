@@ -156,6 +156,7 @@ export interface EditProfileFormProps {
     user: User;
     onUpdateSuccess: (updatedUser: User) => void;
     onClose: () => void;
+    isMobile?: boolean;
 }
 
 

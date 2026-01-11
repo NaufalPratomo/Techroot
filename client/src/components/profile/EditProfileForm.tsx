@@ -12,7 +12,7 @@ import { AvatarSelectionGrid } from "./AvatarSelectionGrid"
 import { ProfileInputFields } from "./ProfileInputFields"
 import type { EditProfileFormProps, ProfileFormData, User } from "@/types"
 
-export const EditProfileForm = ({ user, onUpdateSuccess, onClose }: EditProfileFormProps) => {
+export const EditProfileForm = ({ user, onUpdateSuccess, onClose, isMobile = false }: EditProfileFormProps) => {
     const [formData, setFormData] = useState<ProfileFormData>({
         name: user.name,
         institution: user.institution || "",
@@ -85,6 +85,65 @@ export const EditProfileForm = ({ user, onUpdateSuccess, onClose }: EditProfileF
         }
     }
 
+    // Mobile layout with scrollable content and fixed button
+    if (isMobile) {
+        return (
+            <>
+                {/* Scrollable Content */}
+                <div className="flex-1 overflow-y-auto px-4 py-4">
+                    <div className="space-y-6">
+                        <PhotoUploadSection
+                            userName={formData.name}
+                            currentAvatar={formData.avatar}
+                            uploadedImage={uploadedImage}
+                            isUploading={isUploading}
+                            onUploadClick={triggerFileInput}
+                            onRemoveClick={handleRemoveImage}
+                        />
+
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            className="hidden"
+                        />
+
+                        <AvatarSelectionGrid
+                            avatarOptions={AVATAR_OPTIONS}
+                            selectedAvatar={formData.avatar}
+                            onSelectAvatar={handleAvatarSelect}
+                            isVisible={!uploadedImage}
+                        />
+
+                        <ProfileInputFields
+                            formData={formData}
+                            onChange={handleFieldChange}
+                        />
+                    </div>
+                </div>
+
+                {/* Fixed Submit Button */}
+                <div className="flex-shrink-0 border-t border-slate-100 p-4 bg-white">
+                    <Button
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={isSubmitting || isUploading}
+                        className="w-full h-14 rounded-2xl bg-[#2443B0] hover:bg-[#1a36a9] text-white font-black shadow-xl shadow-[#2443B0]/20 transition-all gap-3"
+                    >
+                        {isSubmitting ? (
+                            <Loader2 className="h-5 w-5 animate-spin" />
+                        ) : (
+                            <ShieldCheck className="h-5 w-5" />
+                        )}
+                        Simpan Perubahan
+                    </Button>
+                </div>
+            </>
+        )
+    }
+
+    // Desktop layout (original)
     return (
         <form onSubmit={handleSubmit} className="space-y-6 pt-4">
             <PhotoUploadSection

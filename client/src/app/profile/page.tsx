@@ -164,10 +164,13 @@ export default function ProfilePage() {
 
             {/* Mobile/Tablet Bottom Sheet */}
             <Sheet open={isMobile && isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-                <SheetContent side="bottom" className="rounded-t-3xl border-none shadow-2xl p-4 pb-12 focus:outline-none">
-                    <SheetHeader className="space-y-2 text-left p-4">
-                        <SheetTitle className="text-3xl font-black tracking-tight text-[#2443B0]">Edit Profil</SheetTitle>
-                        <SheetDescription className="text-slate-500 font-bold">
+                <SheetContent
+                    side="bottom"
+                    className="rounded-t-3xl border-none shadow-2xl p-0 pb-0 focus:outline-none h-[90vh] flex flex-col"
+                >
+                    <SheetHeader className="space-y-2 text-left p-4 pb-3 border-b border-slate-100 flex-shrink-0">
+                        <SheetTitle className="text-2xl sm:text-3xl font-black tracking-tight text-[#2443B0]">Edit Profil</SheetTitle>
+                        <SheetDescription className="text-slate-500 font-bold text-sm">
                             Perbarui informasi profil Anda di sini.
                         </SheetDescription>
                     </SheetHeader>
@@ -175,6 +178,7 @@ export default function ProfilePage() {
                         user={user}
                         onUpdateSuccess={handleUpdateSuccess}
                         onClose={() => setIsEditModalOpen(false)}
+                        isMobile={true}
                     />
                 </SheetContent>
             </Sheet>
