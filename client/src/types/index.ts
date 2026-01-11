@@ -114,3 +114,34 @@ export interface Feature {
     description: string;
     icon: string;
 }
+
+// ==================== USER CONTEXT TYPES ====================
+export interface GitHubLoginResult {
+    success: boolean;
+    message?: string;
+    isNewUser?: boolean;
+}
+
+export interface UserContextType {
+    user: User | null;
+    xp: number;
+    level: number;
+    streak: number;
+    lastActiveDate: string | null;
+    progress: Progress;
+    badges: Badge[];
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    login: (email: string, password: string) => Promise<boolean>;
+    register: (name: string, email: string, password: string, institution?: string) => Promise<boolean>;
+    logout: () => void;
+    addXP: (amount: number) => void;
+    completeLesson: (moduleId: string, lessonId: string, xpReward: number) => Promise<void>;
+    completeModule: (pathId: string, moduleId: string, xpReward?: number) => Promise<void>;
+    setCurrentPosition: (pathId: string, moduleId: string, lessonId?: string) => void;
+    syncProgress: () => Promise<void>;
+    updateUser: (data: Partial<User>) => void;
+    initiateGitHubLogin: () => Promise<void>;
+    loginWithGitHub: (code: string) => Promise<GitHubLoginResult>;
+}
+
