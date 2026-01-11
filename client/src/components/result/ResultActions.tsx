@@ -9,26 +9,37 @@ interface ResultActionsProps {
 
 export const ResultActions = ({ pathId, moduleId }: ResultActionsProps) => {
     return (
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Button
                 asChild
-                className="flex-1 bg-[#2443B0] hover:bg-[#1e3895] text-white rounded-full h-12 text-base font-semibold"
+                className="w-full bg-[#2443B0] hover:bg-[#1e3895] text-white rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold"
             >
                 <Link href="/dashboard">
-                    <Home className="h-5 w-5 mr-2" />
+                    <Home className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Kembali ke Dashboard
                 </Link>
             </Button>
 
-            {pathId && moduleId && (
+            {pathId && moduleId ? (
                 <Button
                     asChild
                     variant="outline"
-                    className="flex-1 rounded-full h-12 text-base font-semibold border-slate-200 hover:bg-slate-50"
+                    className="w-full rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold border-slate-200 hover:bg-slate-50"
                 >
                     <Link href={`/paths/${pathId}`}>
                         Lanjut Belajar
-                        <ArrowRight className="h-5 w-5 ml-2" />
+                        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+                    </Link>
+                </Button>
+            ) : (
+                <Button
+                    asChild
+                    variant="outline"
+                    className="w-full rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold border-slate-200 hover:bg-slate-50"
+                >
+                    <Link href="/paths">
+                        Jelajahi Paths
+                        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
                     </Link>
                 </Button>
             )}

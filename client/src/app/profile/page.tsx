@@ -75,7 +75,7 @@ export default function ProfilePage() {
         return (
             <div className="min-h-screen bg-[#FDFDFF]">
                 <Header />
-                <div className="container max-w-6xl mx-auto px-4 py-32 space-y-8">
+                <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-32 space-y-8">
                     <Skeleton className="h-64 md:h-96 w-full rounded-3xl" />
                     <div className="grid lg:grid-cols-12 gap-8 lg:items-stretch items-start">
                         <div className="lg:col-span-4 flex flex-col gap-6 w-full">
@@ -102,13 +102,13 @@ export default function ProfilePage() {
         <div className="min-h-screen bg-[#FDFDFF] text-slate-900 selection:bg-[#2443B0]/10 selection:text-[#2443B0]">
             <Header />
 
-            <main className="pt-24 pb-20 md:pt-32 md:pb-32">
+            <main className="pt-20 pb-16 sm:pt-24 sm:pb-20 md:pt-32 md:pb-32">
                 <ProfileBanner user={user} onEditClick={() => setIsEditModalOpen(true)} />
 
-                <div className="container max-w-7xl mx-auto px-4 mt-12 sm:mt-16 md:mt-20">
-                    <div className="grid lg:grid-cols-12 gap-8 md:gap-10 lg:items-stretch items-start">
+                <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12 md:mt-16 lg:mt-20">
+                    <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 md:gap-10 lg:items-stretch items-start">
                         {/* LEFT COLUMN */}
-                        <div className="lg:col-span-4 flex flex-col gap-8 w-full">
+                        <div className="lg:col-span-4 flex flex-col gap-6 sm:gap-8 w-full">
                             <div className="grid grid-cols-2 gap-4 sm:gap-6">
                                 <StatCard
                                     icon={Zap}

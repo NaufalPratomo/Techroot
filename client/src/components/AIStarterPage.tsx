@@ -76,9 +76,6 @@ const WelcomeScreen = () => (
         <p className="text-slate-500 text-base sm:text-lg md:text-xl text-center max-w-lg px-4">
             Tanyakan apapun tentang <strong className="text-slate-700">coding, pemrograman, dan teknologi</strong>. Debug error, minta contoh kode, atau penjelasan konsep.
         </p>
-        <p className="text-slate-400 text-sm text-center mt-3 px-4">
-            <em>Root hanya menjawab pertanyaan seputar coding & teknologi</em>
-        </p>
     </div>
 );
 

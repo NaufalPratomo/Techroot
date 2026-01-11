@@ -61,7 +61,7 @@ function ResultContent() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 flex items-center justify-center p-4 sm:p-6 md:p-8">
             {/* Confetti Animation */}
             {showConfetti && windowSize.width > 0 && (
                 <Confetti
