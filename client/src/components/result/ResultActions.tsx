@@ -9,14 +9,14 @@ interface ResultActionsProps {
 
 export const ResultActions = ({ pathId, moduleId }: ResultActionsProps) => {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3">
             <Button
                 asChild
                 className="w-full bg-[#2443B0] hover:bg-[#1e3895] text-white rounded-full h-11 sm:h-12 text-sm sm:text-base font-semibold"
             >
                 <Link href="/dashboard">
                     <Home className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                    Kembali ke Dashboard
+                    Dashboard
                 </Link>
             </Button>
 

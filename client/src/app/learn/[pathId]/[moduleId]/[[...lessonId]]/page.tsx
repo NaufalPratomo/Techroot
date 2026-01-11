@@ -36,7 +36,7 @@ export default function ModuleDetail({
     const { isAuthenticated, progress, completeLesson, completeModule, setCurrentPosition } = useUser();
     const { toast } = useToast();
     const router = useRouter();
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'materi' | 'tanya-root'>('materi');
 
     const path = pathId ? getPathById(pathId) : undefined;
@@ -65,6 +65,28 @@ export default function ModuleDetail({
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathId, moduleId, currentLessonId, isAuthenticated]);
+
+    // Close sidebar on mobile when navigating to different module/lesson
+    useEffect(() => {
+        // Close sidebar on navigation (mobile behavior)
+        setSidebarOpen(false);
+    }, [moduleId, currentLessonId]);
+
+    // Set responsive default for sidebar on mount
+    useEffect(() => {
+        const handleResize = () => {
+            // Auto-open sidebar on desktop (>= 1024px)
+            if (window.innerWidth >= 1024) {
+                setSidebarOpen(true);
+            }
+        };
+
+        // Set initial state
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     if (!path || !module) {
         return (
