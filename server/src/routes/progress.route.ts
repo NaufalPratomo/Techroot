@@ -1,9 +1,9 @@
-import express, { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { supabase } from '../lib/supabase';
 import { authenticateToken, AuthRequest } from '../middleware/auth';
 import type { ExpressResponse } from '../types/express.d';
 
-const router: Router = express.Router();
+const router = Router();
 const now = () => new Date().toISOString();
 const today = () => now().split('T')[0];
 
@@ -25,7 +25,7 @@ const updateXP = async (userId: string, amount: number) => {
     await supabase.from('users').update({ xp: (data?.xp || 0) + amount }).eq('id', userId);
 };
 
-router.get('/', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.get('/', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {
@@ -65,7 +65,7 @@ router.get('/', authenticateToken as express.RequestHandler, async (req, res): P
     }
 });
 
-router.post('/lesson', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.post('/lesson', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {
@@ -95,7 +95,7 @@ router.post('/lesson', authenticateToken as express.RequestHandler, async (req, 
     }
 });
 
-router.post('/module', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.post('/module', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {
@@ -125,7 +125,7 @@ router.post('/module', authenticateToken as express.RequestHandler, async (req, 
     }
 });
 
-router.put('/current', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.put('/current', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {
@@ -142,7 +142,7 @@ router.put('/current', authenticateToken as express.RequestHandler, async (req, 
     }
 });
 
-router.post('/sync', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.post('/sync', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {

@@ -1,9 +1,9 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import { supabase } from '../lib/supabase';
 import { env } from '../config/env';
 import type { ExpressRequest, ExpressResponse } from '../types/express.d';
 
-const router: Router = express.Router();
+const router = Router();
 
 router.get('/', async (req, res): Promise<void> => {
     const typedRes = res as unknown as ExpressResponse;

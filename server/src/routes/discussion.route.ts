@@ -1,9 +1,9 @@
-import express, { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { supabase } from '../lib/supabase';
 import { authenticateToken, AuthRequest } from '../middleware/auth';
 import type { ExpressRequest, ExpressResponse } from '../types/express.d';
 
-const router: Router = express.Router();
+const router = Router();
 
 interface MessageData {
     id: string;
@@ -47,7 +47,7 @@ router.get('/:moduleId', async (req, res): Promise<void> => {
     }
 });
 
-router.post('/:moduleId', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.post('/:moduleId', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {
@@ -70,7 +70,7 @@ router.post('/:moduleId', authenticateToken as express.RequestHandler, async (re
     }
 });
 
-router.delete('/:moduleId/:messageId', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.delete('/:moduleId/:messageId', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {

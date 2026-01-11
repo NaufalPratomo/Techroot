@@ -1,8 +1,8 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import { env } from '../config/env';
 import type { ExpressRequest, ExpressResponse } from '../types/express.d';
 
-const router: Router = express.Router();
+const router = Router();
 
 router.post('/chat', async (req: ExpressRequest, res: ExpressResponse): Promise<void> => {
     try {

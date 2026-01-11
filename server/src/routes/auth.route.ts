@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { supabase } from '../lib/supabase';
@@ -6,7 +6,7 @@ import { env } from '../config/env';
 import { authenticateToken, AuthRequest } from '../middleware/auth';
 import type { ExpressRequest, ExpressResponse } from '../types/express.d';
 
-const router: Router = express.Router();
+const router = Router();
 const today = () => new Date().toISOString().split('T')[0];
 
 // GitHub OAuth helper functions
@@ -159,7 +159,7 @@ router.post('/login', async (req, res): Promise<void> => {
     }
 });
 
-router.get('/me', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.get('/me', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {
@@ -176,7 +176,7 @@ router.get('/me', authenticateToken as express.RequestHandler, async (req, res):
     }
 });
 
-router.put('/update', authenticateToken as express.RequestHandler, async (req, res): Promise<void> => {
+router.put('/update', authenticateToken, async (req, res): Promise<void> => {
     const typedReq = req as unknown as AuthRequest;
     const typedRes = res as unknown as ExpressResponse;
     try {
