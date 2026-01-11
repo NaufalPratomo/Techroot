@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { AIModel, ChatMessage } from "@/types";
 import { AI_MODELS, AVAILABLE_MODEL_IMAGES, getSystemPrompt } from "@/constants/ai";
 import { api } from "@/lib/api";
+import { useUser } from "@/context/UserContext";
 
 // ==================== SUB-COMPONENTS ====================
 const ModelIcon = ({ brand, color, className }: { brand: string; color: string; className?: string }) => {
@@ -16,41 +17,51 @@ const ModelIcon = ({ brand, color, className }: { brand: string; color: string; 
     return brand === "google" ? <Bot className={className} style={{ color }} /> : <Cpu className={className} style={{ color }} />;
 };
 
-const FormattedContent = ({ content }: { content: string }) => (
-    <div className="text-sm md:text-base whitespace-pre-wrap leading-relaxed opacity-95">
-        {content.split(/(\*\*.*?\*\*)/g).map((part, i) =>
-            part.startsWith("**") && part.endsWith("**")
-                ? <strong key={i} className="font-bold text-slate-900">{part.slice(2, -2)}</strong>
-                : part
-        )}
+const FormattedContent = ({ content, isUser }: { content: string; isUser?: boolean }) => (
+    <div className={cn("text-sm md:text-base whitespace-pre-wrap leading-relaxed", isUser ? "opacity-100" : "opacity-95")}>
+        {content.split(/(\*\*.*?\*\*|\*.*?\*)/g).map((part, i) => {
+            if ((part.startsWith("**") && part.endsWith("**")) || (part.startsWith("*") && part.endsWith("*"))) {
+                const text = part.startsWith("**") ? part.slice(2, -2) : part.slice(1, -1);
+                return (
+                    <strong key={i} className={cn("font-bold", isUser ? "text-white" : "text-slate-900")}>
+                        {text}
+                    </strong>
+                );
+            }
+            return part;
+        })}
     </div>
 );
 
-const ChatBubble = ({ msg }: { msg: ChatMessage }) => (
+const ChatBubble = ({ msg, userAvatar }: { msg: ChatMessage; userAvatar?: string }) => (
     <div className={cn("flex w-full animate-in fade-in slide-in-from-bottom-2 duration-500 gap-3", msg.role === "user" ? "flex-row-reverse" : "flex-row")}>
-        <div className={cn("flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-md border animate-in zoom-in-50 duration-500", msg.role === "user" ? "bg-white border-blue-100 text-blue-600" : "bg-blue-600 border-blue-400 text-white")}>
-            <div className="h-6 w-6 flex items-center justify-center">{msg.role === "user" ? <User className="h-5 w-5" /> : <Bot className="h-5 w-5" />}</div>
+        <div className={cn("flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center shadow-sm border animate-in zoom-in-50 duration-500 overflow-hidden", msg.role === "user" ? "bg-white border-slate-100 text-blue-600" : "bg-blue-600 border-blue-400 text-white")}>
+            {msg.role === "user" ? (
+                userAvatar ? <img src={userAvatar} alt="User" className="w-full h-full object-cover" /> : <User className="h-4 w-4" />
+            ) : (
+                <Bot className="h-4 w-4" />
+            )}
         </div>
-        <div className={cn("max-w-[85%] rounded-[24px] px-4 py-3 shadow-sm transition-all hover:shadow-md", msg.role === "user" ? "bg-[#2443B0] text-white rounded-tr-none" : "bg-white border border-slate-100 text-slate-800 rounded-tl-none")}>
-            <FormattedContent content={msg.content} />
+        <div className={cn(
+            "max-w-[85%] rounded-2xl px-5 py-3.5 shadow-sm transition-all hover:shadow-md border",
+            msg.role === "user"
+                ? "bg-[#2443B0] border-[#1e3895] text-white rounded-tr-none"
+                : "bg-white border-slate-100 text-slate-800 rounded-tl-none"
+        )}>
+            <FormattedContent content={msg.content} isUser={msg.role === "user"} />
         </div>
     </div>
 );
 
 const LoadingBubble = () => (
     <div className="flex w-full animate-in fade-in duration-300 gap-3">
-        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-lg border border-blue-400">
-            <Bot className="h-5 w-5 text-white" />
+        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center shadow-sm border border-blue-400">
+            <Bot className="h-4 w-4 text-white" />
         </div>
-        <div className="bg-white border border-slate-100 rounded-[24px] p-5 rounded-tl-none shadow-sm flex flex-col gap-3 min-w-[200px]">
-            <div className="flex items-center gap-2">
-                <div className="h-2 w-2 bg-blue-600 rounded-full" />
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">Root sedang merespon</span>
-            </div>
-            <div className="space-y-2">
-                <div className="h-2 bg-slate-100 rounded-full w-full animate-pulse" />
-                <div className="h-2 bg-slate-100 rounded-full w-3/4 animate-pulse delay-75" />
-            </div>
+        <div className="bg-white border border-slate-100 rounded-3xl px-5 py-4 rounded-tl-none shadow-sm flex items-center gap-1.5">
+            <div className="h-1.5 w-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+            <div className="h-1.5 w-1.5 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
+            <div className="h-1.5 w-1.5 bg-blue-600 rounded-full animate-bounce" />
         </div>
     </div>
 );
@@ -134,6 +145,7 @@ interface AIStarterPageProps {
 }
 
 export const AIStarterPage = ({ moduleTitle, lessonTitle }: AIStarterPageProps) => {
+    const { user } = useUser();
     const [inputValue, setInputValue] = useState("");
     const [selectedModel, setSelectedModel] = useState(AI_MODELS[0]);
     const [showModelDropdown, setShowModelDropdown] = useState(false);
@@ -196,7 +208,7 @@ export const AIStarterPage = ({ moduleTitle, lessonTitle }: AIStarterPageProps) 
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col">
                         {messages.length === 0 ? <WelcomeScreen /> : (
                             <div className="py-20 sm:py-28 space-y-6 sm:space-y-8">
-                                {messages.map((msg, i) => <ChatBubble key={i} msg={msg} />)}
+                                {messages.map((msg, i) => <ChatBubble key={i} msg={msg} userAvatar={user?.avatar} />)}
                                 {isLoading && <LoadingBubble />}
                             </div>
                         )}
