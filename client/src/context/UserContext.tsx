@@ -173,12 +173,14 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // GitHub OAuth functions
   const initiateGitHubLogin = useCallback(async () => {
     try {
+      console.log('🔍 Initiating GitHub login with API_URL:', API_URL);
       const data = await api<{ success: boolean; data: { url: string } }>('/api/auth/github');
+      console.log('✅ GitHub OAuth response:', data);
       if (data.success && data.data?.url) {
         window.location.href = data.data.url;
       }
     } catch (error) {
-      console.error('Failed to initiate GitHub login:', error);
+      console.error('❌ Failed to initiate GitHub login:', error);
     }
   }, []);
 
