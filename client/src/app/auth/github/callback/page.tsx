@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
-import { Loader2, Circle, XCircle } from 'lucide-react';
+import { Loader2, Check, XCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function GitHubCallback() {
@@ -68,7 +68,7 @@ export default function GitHubCallback() {
                     )}
                     {status === 'success' && (
                         <div className="h-20 w-20 rounded-full bg-emerald-50 flex items-center justify-center mx-auto">
-                            <Circle className="h-10 w-10 text-emerald-500" />
+                            <Check className="h-10 w-10 text-emerald-500" />
                         </div>
                     )}
                     {status === 'error' && (
