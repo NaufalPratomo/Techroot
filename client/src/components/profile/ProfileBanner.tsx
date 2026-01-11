@@ -1,6 +1,6 @@
 "use client"
 
-import { Camera, Crown } from "lucide-react"
+import { Camera, Pencil } from "lucide-react"
 import { getInitials } from "@/lib/helpers"
 import type { User } from "@/types"
 
@@ -37,7 +37,7 @@ export const ProfileBanner = ({ user, onEditClick }: ProfileBannerProps) => {
                                 )}
                             </div>
                             <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-[#D7FE44] border-2 sm:border-4 border-white flex items-center justify-center text-[#1a1a1a] shadow-xl animate-bounce-slow z-20">
-                                <Crown className="w-5 h-5 sm:w-6 sm:h-6" />
+                                <Pencil className="w-5 h-5 sm:w-6 sm:h-6" />
                             </div>
                             <button
                                 onClick={onEditClick}

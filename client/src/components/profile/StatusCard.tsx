@@ -2,7 +2,7 @@
 
 import { Activity, Target, Award, Settings, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import type { User, Badge } from "@/types"
+import type { Badge } from "@/types"
 
 interface StatusCardProps {
     badges?: Badge[]
@@ -44,15 +44,9 @@ export const StatusCard = ({ badges, onEditClick, onLogout }: StatusCardProps) =
 
                 <div className="mt-auto pt-4 flex flex-col gap-4">
                     <Button
-                        onClick={onEditClick}
-                        className="w-full rounded-2xl h-14 font-black bg-[#2443B0] hover:bg-[#1a36a9] text-white shadow-xl shadow-[#2443B0]/20 transition-all border-none gap-3"
-                    >
-                        <Settings className="h-5 w-5" /> Edit Profil
-                    </Button>
-                    <Button
                         onClick={onLogout}
                         variant="ghost"
-                        className="w-full rounded-2xl h-14 font-black text-red-500 hover:bg-red-50 hover:text-red-600 transition-all gap-3"
+                        className="w-full rounded-2xl h-14 font-black cursor-pointer text-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600 transition-all gap-3"
                     >
                         <LogOut className="h-5 w-5" /> Keluar Akun
                     </Button>

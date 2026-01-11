@@ -145,3 +145,17 @@ export interface UserContextType {
     loginWithGitHub: (code: string) => Promise<GitHubLoginResult>;
 }
 
+// ==================== PROFILE FORM TYPES ====================
+export interface ProfileFormData {
+    name: string;
+    institution: string;
+    avatar: string;
+}
+
+export interface EditProfileFormProps {
+    user: User;
+    onUpdateSuccess: (updatedUser: User) => void;
+    onClose: () => void;
+}
+
+
