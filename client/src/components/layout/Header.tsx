@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useUser } from "@/context/UserContext";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { Code2, Flame, Zap, Menu, X, User, LayoutDashboard, LogOut, ChevronDown } from "lucide-react";
+import { Flame, Zap, Menu, X, User, LayoutDashboard, LogOut, ChevronDown } from "lucide-react";
 import { getInitials } from "@/lib/helpers";
 
 const NAV_LINKS = [
@@ -172,7 +173,10 @@ export function Header() {
         <header className="fixed left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-7xl border-2 border-border bg-white backdrop-blur-xl rounded-b-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] ring-1 ring-black/5">
             <div className="mx-auto flex h-16 items-center justify-between px-6">
                 <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
-                    <Code2 className="h-6 w-6" /><span className="hidden sm:inline">Techroot</span>
+                    <div className="relative h-8 w-8 sm:h-10 sm:w-10">
+                        <Image src="/techroot.jpg" alt="Techroot" fill className="object-contain rounded-lg" />
+                    </div>
+                    <span className="hidden sm:inline">Techroot</span>
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-6">
