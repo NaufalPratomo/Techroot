@@ -7,6 +7,8 @@
 [![Supabase](https://img.shields.io/badge/Supabase-DB-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
 [![GitHub OAuth](https://img.shields.io/badge/GitHub-OAuth-181717?style=for-the-badge&logo=github)](https://docs.github.com/en/apps/oauth-apps)
 
+### 🌐 Live Demo: [https://techroot-olive.vercel.app/](https://techroot-olive.vercel.app/)
+
 **Techroot** bukan sekadar platform belajar biasa. Ia adalah ekosistem pendidikan cerdas yang dirancang untuk menumbuhkan akar keahlian Anda di dunia teknologi dari dasar hingga mahir, didorong oleh kekuatan _Large Language Models_ (LLM) terkini.
 
 ---
