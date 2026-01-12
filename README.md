@@ -62,6 +62,30 @@ Techroot dibangun dengan prinsip modernitas, performa tinggi, dan skalabilitas:
 - **Authentication**: JWT + GitHub OAuth 2.0
 - **AI Engines**: Deepseek R1, Google Gemma 3, Nvidia Nemotron.
 
+#### 🌐 Backend API
+
+Backend API Techroot di-deploy di Vercel dan dapat diakses di:
+
+**🔗 Live API**: [https://backend-techroot.vercel.app/](https://backend-techroot.vercel.app/)
+
+**📂 Source Code**: [Server Folder](./server)
+
+<p align="center">
+  <img src="./client/public/backend.png" alt="Backend API" width="400" style="border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <br>
+  <em>Backend API Dashboard - Express.js with Vercel Deployment</em>
+</p>
+
+#### 🗄️ Database Schema
+
+Database menggunakan PostgreSQL yang di-hosting di Supabase dengan struktur yang teroptimasi:
+
+<p align="center">
+  <img src="./client/public/database.png" alt="Database Schema" width="400" style="border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <br>
+  <em>Supabase Database - PostgreSQL Schema Visualization</em>
+</p>
+
 ---
 
 ## ⚡ Quick Start & Setup
@@ -142,6 +166,17 @@ cd client && pnpm run dev
 ```
 
 Aplikasi akan berjalan di `http://localhost:3000` 🚀
+
+### 6. Testing Account
+
+Untuk testing dan demo, gunakan akun berikut:
+
+```
+Email: user@techroot.id
+Password: techroot455
+```
+
+---
 
 ## 📂 Struktur Folder & Fungsi (Clean Architecture)
 
