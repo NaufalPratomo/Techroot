@@ -11,7 +11,7 @@ export const FooterSection = () => (
             <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
                 <div className="md:col-span-4 space-y-12">
                     <div className="relative h-24 w-24 md:h-32 md:w-32 group">
-                        <Image src="/polinema.png" alt="Polinema" fill className="object-contain transition-all duration-500" />
+                        <Image src="/techroot.jpg" alt="Techroot" fill className="object-contain rounded-2xl transition-all duration-500" />
                     </div>
                     <div>
                         <p className="text-sm font-medium text-slate-500 tracking-wide">(+62) 812-3456-7890</p>
