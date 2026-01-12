@@ -1,4 +1,4 @@
-# <img src="./client/public/assets/logo.png" width="40" height="40" valign="middle"> Techroot: Empowering Your Code Roots with AI
+# <img src="./client/public/techroot.jpg" width="50" height="50" style="border-radius: 8px;" valign="middle"> Techroot: Empowering Your Code Roots with AI
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
